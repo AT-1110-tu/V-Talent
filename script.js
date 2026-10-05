@@ -1,4 +1,19 @@
 /* ================================================= */
+/* SUPABASE */
+/* ================================================= */
+
+const SUPABASE_URL =
+    "https://wiajsvsfopozfpmoblgy.supabase.co";
+
+const SUPABASE_ANON_KEY =
+    "sb_publishable_z3WZQg-t1hAOvh4wkzypyg_9EMIsZO5";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
+/* ================================================= */
 /* DATA */
 /* ================================================= */
 
@@ -1101,10 +1116,16 @@ function scrollToNeeds() {
 
 document.addEventListener(
     "DOMContentLoaded",
-    function() {
+    async function() {
+
+        const { data, error } =
+            await supabaseClient
+                .from("needs")
+                .select("*");
+
+        console.log("SUPABASE TEST:", data, error);
 
         renderUserNeeds();
-
         renderStudentProfile();
 
     }
