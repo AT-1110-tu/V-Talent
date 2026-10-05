@@ -437,10 +437,6 @@ async function openUserNeed(id) {
 /* JOIN PROJECT */
 /* ================================================= */
 
-/* ================================================= */
-/* JOIN PROJECT */
-/* ================================================= */
-
 async function joinProject() {
 
     console.log("JOIN PROJECT ĐÃ CHẠY");
@@ -468,7 +464,14 @@ async function joinProject() {
         return;
     }
 
-    if (!currentProjectId) return;
+
+    if (!currentProjectId) {
+
+        console.log("KHÔNG CÓ PROJECT ID");
+
+        return;
+
+    }
 
 
     /* ========================= */
@@ -491,6 +494,7 @@ async function joinProject() {
         );
 
         return;
+
     }
 
 
@@ -522,6 +526,7 @@ async function joinProject() {
             );
 
             return;
+
         }
 
 
@@ -530,31 +535,40 @@ async function joinProject() {
     }
 
 
+    console.log("USER ĐÃ XÁC ĐỊNH:", user);
+
+
     /* ========================= */
     /* KIỂM TRA PROJECT */
     /* ========================= */
 
-    let needId = null;
-
-
-    /*
-     * Project mẫu: spidana / design / digital
-     * → hiện chưa có ID trong bảng needs
-     *
-     * Nhu cầu do người dùng đăng:
-     * → currentProjectId chính là ID trong Supabase
-     */
-
     const isSampleProject =
         ["spidana", "design", "digital"]
-            .includes(String(currentProjectId));
+            .includes(
+                String(currentProjectId)
+            );
+
+
+    let needId = null;
 
 
     if (!isSampleProject) {
 
-        needId = Number(currentProjectId);
+        needId =
+            Number(currentProjectId);
 
     }
+
+
+    console.log(
+        "CURRENT PROJECT:",
+        currentProjectId
+    );
+
+    console.log(
+        "NEED ID:",
+        needId
+    );
 
 
     /* ========================= */
@@ -563,32 +577,49 @@ async function joinProject() {
 
     if (isSampleProject) {
 
-        closeModal();
-
-        showToast(
-            "Đã ghi nhận",
-            "Bạn đã đăng ký quan tâm đến dự án này."
-        );
+        /*
+         * Project mẫu chưa có trong bảng needs.
+         * Vẫn ghi nhận hoạt động bằng localStorage.
+         */
 
         const joinedProjects =
             JSON.parse(
-                localStorage.getItem("agriTalentJoined") || "[]"
+                localStorage.getItem(
+                    "agriTalentJoined"
+                ) || "[]"
             );
 
 
-        if (!joinedProjects.includes(currentProjectId)) {
+        if (
+            !joinedProjects.includes(
+                currentProjectId
+            )
+        ) {
 
-            joinedProjects.push(currentProjectId);
+            joinedProjects.push(
+                currentProjectId
+            );
 
             localStorage.setItem(
                 "agriTalentJoined",
-                JSON.stringify(joinedProjects)
+                JSON.stringify(
+                    joinedProjects
+                )
             );
 
         }
 
 
+        closeModal();
+
         renderStudentProfile();
+
+
+        showToast(
+            "Đã ghi nhận",
+            "AgriTalent Hub đã ghi nhận mong muốn tham gia của bạn."
+        );
+
 
         return;
 
@@ -596,8 +627,13 @@ async function joinProject() {
 
 
     /* ========================= */
-    /* GỬI APPLICATION */
+    /* INSERT APPLICATION */
     /* ========================= */
+
+    console.log(
+        "CHUẨN BỊ INSERT APPLICATION"
+    );
+
 
     const { data, error } =
         await supabaseClient
@@ -615,6 +651,17 @@ async function joinProject() {
             .select();
 
 
+    console.log(
+        "APPLICATION RESULT:",
+        data,
+        error
+    );
+
+
+    /* ========================= */
+    /* XỬ LÝ LỖI */
+    /* ========================= */
+
     if (error) {
 
         console.error(
@@ -622,14 +669,21 @@ async function joinProject() {
             error
         );
 
+
         showToast(
             "Có lỗi xảy ra",
             "Chưa thể gửi đăng ký tham gia."
         );
 
+
         return;
+
     }
 
+
+    /* ========================= */
+    /* THÀNH CÔNG */
+    /* ========================= */
 
     console.log(
         "APPLICATION CREATED:",
@@ -639,13 +693,13 @@ async function joinProject() {
 
     closeModal();
 
+    renderStudentProfile();
+
+
     showToast(
         "Đã gửi đăng ký",
         "AgriTalent Hub đã ghi nhận đăng ký của bạn."
     );
-
-
-    renderStudentProfile();
 
 }
 
