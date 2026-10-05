@@ -430,13 +430,18 @@ function openUserNeed(id) {
 /* JOIN PROJECT */
 /* ================================================= */
 
-function joinProject() {
+/* ================================================= */
+/* JOIN PROJECT */
+/* ================================================= */
+
+async function joinProject() {
+
+    console.log("JOIN PROJECT ĐÃ CHẠY");
 
     const profile =
         JSON.parse(
             localStorage.getItem("agriTalentStudent")
         );
-
 
     if (!profile) {
 
@@ -454,51 +459,186 @@ function joinProject() {
         }, 250);
 
         return;
-
     }
-
-
-    const joinedProjects =
-        JSON.parse(
-            localStorage.getItem("agriTalentJoined") || "[]"
-        );
-
 
     if (!currentProjectId) return;
 
 
-    if (!joinedProjects.includes(currentProjectId)) {
+    /* ========================= */
+    /* TÌM / TẠO USER */
+    /* ========================= */
 
-        joinedProjects.push(currentProjectId);
+    let { data: user, error: userError } =
+        await supabaseClient
+            .from("users")
+            .select("*")
+            .eq("name", profile.name)
+            .maybeSingle();
 
-        localStorage.setItem(
-            "agriTalentJoined",
-            JSON.stringify(joinedProjects)
+
+    if (userError) {
+
+        console.error(
+            "LOAD USER ERROR:",
+            userError
         );
+
+        return;
+    }
+
+
+    if (!user) {
+
+        const { data: newUser, error: createUserError } =
+            await supabaseClient
+                .from("users")
+                .insert([
+                    {
+                        name: profile.name,
+                        role: "student"
+                    }
+                ])
+                .select()
+                .single();
+
+
+        if (createUserError) {
+
+            console.error(
+                "CREATE USER ERROR:",
+                createUserError
+            );
+
+            showToast(
+                "Có lỗi xảy ra",
+                "Chưa thể tạo hồ sơ trên hệ thống."
+            );
+
+            return;
+        }
+
+
+        user = newUser;
 
     }
 
 
-    closeModal();
+    /* ========================= */
+    /* KIỂM TRA PROJECT */
+    /* ========================= */
 
-    renderStudentProfile();
+    let needId = null;
 
 
-    showToast(
-        "Đã ghi nhận",
-        "AgriTalent Hub đã ghi nhận mong muốn tham gia của bạn."
+    /*
+     * Project mẫu: spidana / design / digital
+     * → hiện chưa có ID trong bảng needs
+     *
+     * Nhu cầu do người dùng đăng:
+     * → currentProjectId chính là ID trong Supabase
+     */
+
+    const isSampleProject =
+        ["spidana", "design", "digital"]
+            .includes(String(currentProjectId));
+
+
+    if (!isSampleProject) {
+
+        needId = Number(currentProjectId);
+
+    }
+
+
+    /* ========================= */
+    /* PROJECT MẪU */
+    /* ========================= */
+
+    if (isSampleProject) {
+
+        closeModal();
+
+        showToast(
+            "Đã ghi nhận",
+            "Bạn đã đăng ký quan tâm đến dự án này."
+        );
+
+        const joinedProjects =
+            JSON.parse(
+                localStorage.getItem("agriTalentJoined") || "[]"
+            );
+
+
+        if (!joinedProjects.includes(currentProjectId)) {
+
+            joinedProjects.push(currentProjectId);
+
+            localStorage.setItem(
+                "agriTalentJoined",
+                JSON.stringify(joinedProjects)
+            );
+
+        }
+
+
+        renderStudentProfile();
+
+        return;
+
+    }
+
+
+    /* ========================= */
+    /* GỬI APPLICATION */
+    /* ========================= */
+
+    const { data, error } =
+        await supabaseClient
+            .from("applications")
+            .insert([
+                {
+                    student_id: user.id,
+                    need_id: needId,
+                    message:
+                        "Sinh viên muốn tham gia hỗ trợ nhu cầu này.",
+                    status:
+                        "Đang chờ duyệt"
+                }
+            ])
+            .select();
+
+
+    if (error) {
+
+        console.error(
+            "APPLICATION ERROR:",
+            error
+        );
+
+        showToast(
+            "Có lỗi xảy ra",
+            "Chưa thể gửi đăng ký tham gia."
+        );
+
+        return;
+    }
+
+
+    console.log(
+        "APPLICATION CREATED:",
+        data
     );
 
 
-    setTimeout(function() {
+    closeModal();
 
-        document
-            .getElementById("activity")
-            .scrollIntoView({
-                behavior: "smooth"
-            });
+    showToast(
+        "Đã gửi đăng ký",
+        "AgriTalent Hub đã ghi nhận đăng ký của bạn."
+    );
 
-    }, 300);
+
+    renderStudentProfile();
 
 }
 
