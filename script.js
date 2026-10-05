@@ -213,19 +213,19 @@ async function submitNeed() {
     /* GỬI NHU CẦU LÊN SUPABASE */
     /* ========================= */
 
-    const { data, error } = await supabaseClient
-        .from("needs")
+const { error } =
+    await supabaseClient
+        .from("applications")
         .insert([
             {
-                title: product,
-                category: category,
-                description: description,
-                duration: duration,
-                status: "Đang tìm"
+                student_id: user.id,
+                need_id: needId,
+                message:
+                    "Sinh viên muốn tham gia hỗ trợ nhu cầu này.",
+                status:
+                    "Đang chờ duyệt"
             }
-        ])
-        .select();
-
+        ]);
 
     /* ========================= */
     /* KIỂM TRA LỖI */
@@ -252,9 +252,9 @@ async function submitNeed() {
     /* ========================= */
 
     console.log(
-        "ĐÃ LƯU SUPABASE:",
-        data
-    );
+    "APPLICATION RESULT:",
+    error
+);
 
 
     closeModal();
