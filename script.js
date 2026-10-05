@@ -162,7 +162,7 @@ function toggleCustomDuration() {
 /* SUBMIT NEED */
 /* ================================================= */
 
-function submitNeed() {
+async function submitNeed() {
 
     const product =
         document.getElementById("productName")
@@ -187,21 +187,18 @@ function submitNeed() {
             .value
             .trim();
 
-
     let duration = durationSelect;
 
-
     if (durationSelect === "custom") {
-
         duration = customDuration;
-
     }
 
-
-    if (!product ||
+    if (
+        !product ||
         !category ||
         !description ||
-        !duration) {
+        !duration
+    ) {
 
         showToast(
             "Chưa đủ thông tin",
@@ -209,51 +206,68 @@ function submitNeed() {
         );
 
         return;
-
     }
 
 
-    const savedNeeds =
-        JSON.parse(
-            localStorage.getItem("agriTalentNeeds") || "[]"
+    /* ========================= */
+    /* GỬI NHU CẦU LÊN SUPABASE */
+    /* ========================= */
+
+    const { data, error } = await supabaseClient
+        .from("needs")
+        .insert([
+            {
+                title: product,
+                category: category,
+                description: description,
+                duration: duration,
+                status: "Đang tìm"
+            }
+        ])
+        .select();
+
+
+    /* ========================= */
+    /* KIỂM TRA LỖI */
+    /* ========================= */
+
+    if (error) {
+
+        console.error(
+            "SUPABASE ERROR:",
+            error
         );
 
+        showToast(
+            "Có lỗi xảy ra",
+            "Chưa thể đăng nhu cầu. Thử lại nha."
+        );
 
-    const newNeed = {
-
-        id: "need-" + Date.now(),
-
-        product: product,
-
-        category: category,
-
-        description: description,
-
-        duration: duration,
-
-        location: "Đà Nẵng"
-
-    };
+        return;
+    }
 
 
-    savedNeeds.push(newNeed);
+    /* ========================= */
+    /* THÀNH CÔNG */
+    /* ========================= */
 
-
-    localStorage.setItem(
-        "agriTalentNeeds",
-        JSON.stringify(savedNeeds)
+    console.log(
+        "ĐÃ LƯU SUPABASE:",
+        data
     );
 
 
     closeModal();
 
-    renderUserNeeds();
-
     showToast(
         "Đã đăng nhu cầu",
-        "Nhu cầu của bạn đã được thêm vào AgriTalent Hub."
+        "Nhu cầu đã được lưu trên AgriTalent Hub."
     );
 
+
+    /* ========================= */
+    /* XÓA FORM */
+    /* ========================= */
 
     document.getElementById("productName").value = "";
     document.getElementById("category").value = "";
