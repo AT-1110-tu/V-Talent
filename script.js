@@ -13,6 +13,8 @@ const supabaseClient =
         SUPABASE_URL,
         SUPABASE_ANON_KEY
     );
+
+
 /* ================================================= */
 /* DATA */
 /* ================================================= */
@@ -193,6 +195,7 @@ async function submitNeed() {
         duration = customDuration;
     }
 
+
     if (
         !product ||
         !category ||
@@ -210,31 +213,29 @@ async function submitNeed() {
 
 
     /* ========================= */
-    /* GỬI NHU CẦU LÊN SUPABASE */
+    /* LƯU NHU CẦU VÀO SUPABASE */
     /* ========================= */
 
-const { error } =
-    await supabaseClient
-        .from("applications")
-        .insert([
-            {
-                student_id: user.id,
-                need_id: needId,
-                message:
-                    "Sinh viên muốn tham gia hỗ trợ nhu cầu này.",
-                status:
-                    "Đang chờ duyệt"
-            }
-        ]);
+    const { data, error } =
+        await supabaseClient
+            .from("needs")
+            .insert([
+                {
+                    title: product,
+                    category: category,
+                    description: description,
+                    duration: duration,
+                    status: "Đang tìm"
+                }
+            ])
+            .select()
+            .single();
 
-    /* ========================= */
-    /* KIỂM TRA LỖI */
-    /* ========================= */
 
     if (error) {
 
         console.error(
-            "SUPABASE ERROR:",
+            "SUBMIT NEED ERROR:",
             error
         );
 
@@ -247,14 +248,10 @@ const { error } =
     }
 
 
-    /* ========================= */
-    /* THÀNH CÔNG */
-    /* ========================= */
-
     console.log(
-    "APPLICATION RESULT:",
-    error
-);
+        "NEED CREATED:",
+        data
+    );
 
 
     closeModal();
@@ -278,6 +275,13 @@ const { error } =
     document
         .getElementById("customDurationBox")
         .classList.remove("show");
+
+
+    /* ========================= */
+    /* LOAD LẠI DANH SÁCH */
+    /* ========================= */
+
+    await renderUserNeeds();
 
 }
 
@@ -434,49 +438,10 @@ async function openUserNeed(id) {
 
 
 /* ================================================= */
-/* JOIN PROJECT */
+/* GET / CREATE STUDENT USER */
 /* ================================================= */
 
-async function joinProject() {
-
-    console.log("JOIN PROJECT ĐÃ CHẠY");
-
-    const profile =
-        JSON.parse(
-            localStorage.getItem("agriTalentStudent")
-        );
-
-    if (!profile) {
-
-        closeModal();
-
-        setTimeout(function() {
-
-            openStudentForm();
-
-            showToast(
-                "Tạo hồ sơ trước nhé",
-                "Hồ sơ giúp AgriTalent Hub biết kỹ năng phù hợp của bạn."
-            );
-
-        }, 250);
-
-        return;
-    }
-
-
-    if (!currentProjectId) {
-
-        console.log("KHÔNG CÓ PROJECT ID");
-
-        return;
-
-    }
-
-
-    /* ========================= */
-    /* TÌM / TẠO USER */
-    /* ========================= */
+async function getOrCreateStudentUser(profile) {
 
     let { data: user, error: userError } =
         await supabaseClient
@@ -493,54 +458,269 @@ async function joinProject() {
             userError
         );
 
-        return;
-
+        return null;
     }
 
 
-    if (!user) {
+    if (user) {
+        return user;
+    }
 
-        const { data: newUser, error: createUserError } =
+
+    const { data: newUser, error: createUserError } =
+        await supabaseClient
+            .from("users")
+            .insert([
+                {
+                    name: profile.name,
+                    role: "student"
+                }
+            ])
+            .select()
+            .single();
+
+
+    if (createUserError) {
+
+        console.error(
+            "CREATE USER ERROR:",
+            createUserError
+        );
+
+        return null;
+    }
+
+
+    return newUser;
+
+}
+
+
+/* ================================================= */
+/* GET / CREATE SAMPLE NEED */
+/* ================================================= */
+
+async function getOrCreateSampleNeed(projectId) {
+
+    const project = projects[projectId];
+
+    if (!project) return null;
+
+
+    /* ========================= */
+    /* KIỂM TRA ĐÃ CÓ CHƯA */
+    /* ========================= */
+
+    const { data: existingNeed, error: findError } =
+        await supabaseClient
+            .from("needs")
+            .select("*")
+            .eq("title", project.title)
+            .maybeSingle();
+
+
+    if (findError) {
+
+        console.error(
+            "FIND SAMPLE NEED ERROR:",
+            findError
+        );
+
+        return null;
+    }
+
+
+    if (existingNeed) {
+
+        return existingNeed;
+    }
+
+
+    /* ========================= */
+    /* TẠO PRODUCER */
+    /* ========================= */
+
+    let { data: producer, error: producerError } =
+        await supabaseClient
+            .from("users")
+            .select("*")
+            .eq("name", project.producer)
+            .maybeSingle();
+
+
+    if (producerError) {
+
+        console.error(
+            "LOAD PRODUCER ERROR:",
+            producerError
+        );
+
+        return null;
+    }
+
+
+    if (!producer) {
+
+        const { data: newProducer, error: createProducerError } =
             await supabaseClient
                 .from("users")
                 .insert([
                     {
-                        name: profile.name,
-                        role: "student"
+                        name: project.producer,
+                        role: "producer"
                     }
                 ])
                 .select()
                 .single();
 
 
-        if (createUserError) {
+        if (createProducerError) {
 
             console.error(
-                "CREATE USER ERROR:",
-                createUserError
+                "CREATE PRODUCER ERROR:",
+                createProducerError
             );
 
-            showToast(
-                "Có lỗi xảy ra",
-                "Chưa thể tạo hồ sơ trên hệ thống."
-            );
-
-            return;
-
+            return null;
         }
 
 
-        user = newUser;
-
+        producer = newProducer;
     }
 
 
-    console.log("USER ĐÃ XÁC ĐỊNH:", user);
+    /* ========================= */
+    /* TẠO NEED */
+    /* ========================= */
+
+    const { data: newNeed, error: createNeedError } =
+        await supabaseClient
+            .from("needs")
+            .insert([
+                {
+                    title: project.title,
+                    category: project.category,
+                    description: project.intro,
+                    duration: project.duration,
+                    status: "Đang tìm",
+                    producer_id: producer.id
+                }
+            ])
+            .select()
+            .single();
+
+
+    if (createNeedError) {
+
+        console.error(
+            "CREATE SAMPLE NEED ERROR:",
+            createNeedError
+        );
+
+        return null;
+    }
+
+
+    console.log(
+        "SAMPLE NEED CREATED:",
+        newNeed
+    );
+
+
+    return newNeed;
+
+}
+
+
+/* ================================================= */
+/* JOIN PROJECT */
+/* ================================================= */
+
+async function joinProject() {
+
+    console.log(
+        "JOIN PROJECT ĐÃ CHẠY"
+    );
 
 
     /* ========================= */
-    /* KIỂM TRA PROJECT */
+    /* KIỂM TRA HỒ SƠ */
     /* ========================= */
+
+    const profile =
+        JSON.parse(
+            localStorage.getItem(
+                "agriTalentStudent"
+            )
+        );
+
+
+    if (!profile) {
+
+        closeModal();
+
+
+        setTimeout(function() {
+
+            openStudentForm();
+
+
+            showToast(
+                "Tạo hồ sơ trước nhé",
+                "Hồ sơ giúp AgriTalent Hub biết kỹ năng phù hợp của bạn."
+            );
+
+
+        }, 250);
+
+
+        return;
+    }
+
+
+    if (!currentProjectId) {
+
+        console.log(
+            "KHÔNG CÓ PROJECT ID"
+        );
+
+        return;
+    }
+
+
+    /* ========================= */
+    /* TÌM / TẠO STUDENT USER */
+    /* ========================= */
+
+    const user =
+        await getOrCreateStudentUser(
+            profile
+        );
+
+
+    if (!user) {
+
+        showToast(
+            "Có lỗi xảy ra",
+            "Chưa thể xác định hồ sơ sinh viên."
+        );
+
+        return;
+    }
+
+
+    console.log(
+        "USER ĐÃ XÁC ĐỊNH:",
+        user
+    );
+
+
+    /* ========================= */
+    /* XÁC ĐỊNH NEED */
+    /* ========================= */
+
+    let needId = null;
+
 
     const isSampleProject =
         ["spidana", "design", "digital"]
@@ -549,80 +729,60 @@ async function joinProject() {
             );
 
 
-    let needId = null;
-
-
-    if (!isSampleProject) {
-
-        needId =
-            Number(currentProjectId);
-
-    }
-
-
-    console.log(
-        "CURRENT PROJECT:",
-        currentProjectId
-    );
-
-    console.log(
-        "NEED ID:",
-        needId
-    );
-
-
     /* ========================= */
     /* PROJECT MẪU */
     /* ========================= */
 
     if (isSampleProject) {
 
-        /*
-         * Project mẫu chưa có trong bảng needs.
-         * Vẫn ghi nhận hoạt động bằng localStorage.
-         */
-
-        const joinedProjects =
-            JSON.parse(
-                localStorage.getItem(
-                    "agriTalentJoined"
-                ) || "[]"
+        const sampleNeed =
+            await getOrCreateSampleNeed(
+                String(currentProjectId)
             );
 
 
-        if (
-            !joinedProjects.includes(
-                currentProjectId
-            )
-        ) {
+        if (!sampleNeed) {
 
-            joinedProjects.push(
-                currentProjectId
+            showToast(
+                "Có lỗi xảy ra",
+                "Chưa thể kết nối dự án này với hệ thống."
             );
 
-            localStorage.setItem(
-                "agriTalentJoined",
-                JSON.stringify(
-                    joinedProjects
-                )
-            );
-
+            return;
         }
 
 
-        closeModal();
+        needId =
+            Number(sampleNeed.id);
 
-        renderStudentProfile();
 
-
-        showToast(
-            "Đã ghi nhận",
-            "AgriTalent Hub đã ghi nhận mong muốn tham gia của bạn."
+        console.log(
+            "SAMPLE NEED ID:",
+            needId
         );
 
+    } else {
+
+        needId =
+            Number(currentProjectId);
+
+
+        console.log(
+            "USER NEED ID:",
+            needId
+        );
+
+    }
+
+
+    if (!needId) {
+
+        showToast(
+            "Có lỗi xảy ra",
+            "Không xác định được nhu cầu cần tham gia."
+        );
 
         return;
-
     }
 
 
@@ -635,7 +795,7 @@ async function joinProject() {
     );
 
 
-    const { data, error } =
+    const { error: applicationError } =
         await supabaseClient
             .from("applications")
             .insert([
@@ -647,14 +807,12 @@ async function joinProject() {
                     status:
                         "Đang chờ duyệt"
                 }
-            ])
-            .select();
+            ]);
 
 
     console.log(
-        "APPLICATION RESULT:",
-        data,
-        error
+        "APPLICATION INSERT ERROR:",
+        applicationError
     );
 
 
@@ -662,11 +820,11 @@ async function joinProject() {
     /* XỬ LÝ LỖI */
     /* ========================= */
 
-    if (error) {
+    if (applicationError) {
 
         console.error(
             "APPLICATION ERROR:",
-            error
+            applicationError
         );
 
 
@@ -677,6 +835,42 @@ async function joinProject() {
 
 
         return;
+    }
+
+
+    /* ========================= */
+    /* LƯU HOẠT ĐỘNG LOCAL */
+    /* ========================= */
+
+    const joinedProjects =
+        JSON.parse(
+            localStorage.getItem(
+                "agriTalentJoined"
+            ) || "[]"
+        );
+
+
+    const joinedKey =
+        String(currentProjectId);
+
+
+    if (
+        !joinedProjects.includes(
+            joinedKey
+        )
+    ) {
+
+        joinedProjects.push(
+            joinedKey
+        );
+
+
+        localStorage.setItem(
+            "agriTalentJoined",
+            JSON.stringify(
+                joinedProjects
+            )
+        );
 
     }
 
@@ -686,8 +880,7 @@ async function joinProject() {
     /* ========================= */
 
     console.log(
-        "APPLICATION CREATED:",
-        data
+        "APPLICATION CREATED"
     );
 
 
@@ -715,7 +908,9 @@ function openStudentForm() {
 
     const savedProfile =
         JSON.parse(
-            localStorage.getItem("agriTalentStudent")
+            localStorage.getItem(
+                "agriTalentStudent"
+            )
         );
 
 
@@ -743,9 +938,10 @@ function openStudentForm() {
             .forEach(function(checkbox) {
 
                 checkbox.checked =
-                    savedProfile.skills.includes(
-                        checkbox.value
-                    );
+                    (savedProfile.skills || [])
+                        .includes(
+                            checkbox.value
+                        );
 
             });
 
@@ -753,18 +949,24 @@ function openStudentForm() {
         if (savedProfile.otherSkill) {
 
             document
-                .getElementById("otherSkillCheckbox")
+                .getElementById(
+                    "otherSkillCheckbox"
+                )
                 .checked = true;
 
 
             document
-                .getElementById("otherSkill")
+                .getElementById(
+                    "otherSkill"
+                )
                 .value =
                 savedProfile.otherSkill;
 
 
             document
-                .getElementById("otherSkillBox")
+                .getElementById(
+                    "otherSkillBox"
+                )
                 .classList.add("show");
 
         }
@@ -788,6 +990,7 @@ function toggleOtherSkill() {
             "otherSkillCheckbox"
         );
 
+
     const box =
         document.getElementById(
             "otherSkillBox"
@@ -805,8 +1008,9 @@ function toggleOtherSkill() {
 
         box.classList.remove("show");
 
-        document.getElementById("otherSkill")
-            .value = "";
+        document.getElementById(
+            "otherSkill"
+        ).value = "";
 
     }
 
@@ -845,7 +1049,9 @@ function saveStudentProfile() {
         )
         .forEach(function(checkbox) {
 
-            skills.push(checkbox.value);
+            skills.push(
+                checkbox.value
+            );
 
         });
 
@@ -856,9 +1062,11 @@ function saveStudentProfile() {
             .trim();
 
 
-    if (!name ||
+    if (
+        !name ||
         skills.length === 0 ||
-        !category) {
+        !category
+    ) {
 
         showToast(
             "Chưa đủ thông tin",
@@ -866,12 +1074,15 @@ function saveStudentProfile() {
         );
 
         return;
-
     }
 
 
     if (
-        document.getElementById("otherSkillCheckbox").checked &&
+        document
+            .getElementById(
+                "otherSkillCheckbox"
+            )
+            .checked &&
         !otherSkill
     ) {
 
@@ -920,7 +1131,9 @@ function saveStudentProfile() {
     setTimeout(function() {
 
         document
-            .getElementById("activity")
+            .getElementById(
+                "activity"
+            )
             .scrollIntoView({
                 behavior: "smooth"
             });
@@ -944,7 +1157,9 @@ function renderStudentProfile() {
 
     const profile =
         JSON.parse(
-            localStorage.getItem("agriTalentStudent")
+            localStorage.getItem(
+                "agriTalentStudent"
+            )
         );
 
 
@@ -982,7 +1197,9 @@ function renderStudentProfile() {
 
     const joinedProjects =
         JSON.parse(
-            localStorage.getItem("agriTalentJoined") || "[]"
+            localStorage.getItem(
+                "agriTalentJoined"
+            ) || "[]"
         );
 
 
@@ -1004,7 +1221,10 @@ function renderStudentProfile() {
 
 
             if (projects[id]) {
-                title = projects[id].title;
+
+                title =
+                    projects[id].title;
+
             }
 
 
@@ -1033,35 +1253,48 @@ function renderStudentProfile() {
 
             <div class="profile-skills">
 
-                ${profile.skills.map(function(skill) {
+                ${(profile.skills || [])
+                    .map(function(skill) {
 
-                    if (skill === "Khác" && profile.otherSkill) {
+                        if (
+                            skill === "Khác" &&
+                            profile.otherSkill
+                        ) {
+
+                            return `
+                                <span>
+                                    ${escapeHTML(
+                                        profile.otherSkill
+                                    )}
+                                </span>
+                            `;
+
+                        }
+
 
                         return `
                             <span>
-                                ${escapeHTML(profile.otherSkill)}
+                                ${escapeHTML(skill)}
                             </span>
                         `;
 
-                    }
-
-                    return `
-                        <span>
-                            ${escapeHTML(skill)}
-                        </span>
-                    `;
-
-                }).join("")}
+                    })
+                    .join("")}
 
             </div>
 
+
             ${
                 profile.bio
-                    ? `<p>${escapeHTML(profile.bio)}</p>`
+                    ? `<p>${escapeHTML(
+                        profile.bio
+                    )}</p>`
                     : ""
             }
 
+
             ${joinedHTML}
+
 
             <button
                 class="secondary"
@@ -1094,7 +1327,11 @@ function filterNeeds(category, button) {
 
 
     if (button) {
-        button.classList.add("active");
+
+        button.classList.add(
+            "active"
+        );
+
     }
 
 
@@ -1118,13 +1355,15 @@ function filterNeeds(category, button) {
             cardCategory === category
         ) {
 
-            card.style.display = "flex";
+            card.style.display =
+                "flex";
 
             visibleCount++;
 
         } else {
 
-            card.style.display = "none";
+            card.style.display =
+                "none";
 
         }
 
@@ -1156,22 +1395,24 @@ function filterNeeds(category, button) {
 async function renderUserNeeds() {
 
     const grid =
-        document.getElementById("needGrid");
+        document.getElementById(
+            "needGrid"
+        );
+
 
     if (!grid) return;
 
-
-    /* ========================= */
-    /* LẤY DỮ LIỆU TỪ SUPABASE */
-    /* ========================= */
 
     const { data, error } =
         await supabaseClient
             .from("needs")
             .select("*")
-            .order("created_at", {
-                ascending: false
-            });
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            );
 
 
     if (error) {
@@ -1185,37 +1426,42 @@ async function renderUserNeeds() {
     }
 
 
-    /* ========================= */
-    /* XÓA CÁC CARD CŨ DO USER */
-    /* ========================= */
-
     grid
-        .querySelectorAll("[data-user-id]")
+        .querySelectorAll(
+            "[data-user-id]"
+        )
         .forEach(function(card) {
+
             card.remove();
+
         });
 
 
-    /* Không có nhu cầu */
-    if (!data || data.length === 0) {
+    if (
+        !data ||
+        data.length === 0
+    ) {
+
         return;
+
     }
 
-
-    /* ========================= */
-    /* HIỂN THỊ NHU CẦU */
-    /* ========================= */
 
     data.forEach(function(need) {
 
         const card =
-            document.createElement("article");
+            document.createElement(
+                "article"
+            );
 
 
-        card.className = "need-card";
+        card.className =
+            "need-card";
+
 
         card.dataset.category =
             need.category || "";
+
 
         card.dataset.userId =
             need.id;
@@ -1226,31 +1472,41 @@ async function renderUserNeeds() {
             <div class="card-top">
 
                 <span class="tag">
+
                     ${escapeHTML(
                         need.category || ""
                     ).toUpperCase()}
+
                 </span>
 
+
                 <span class="status">
+
                     ● ${escapeHTML(
-                        need.status || "Đang tìm"
+                        need.status ||
+                        "Đang tìm"
                     )}
+
                 </span>
 
             </div>
 
 
             <h3>
+
                 ${escapeHTML(
                     need.title || ""
                 )}
+
             </h3>
 
 
             <p>
+
                 ${escapeHTML(
                     need.description || ""
                 )}
+
             </p>
 
 
@@ -1288,28 +1544,39 @@ async function renderUserNeeds() {
 /* TOAST */
 /* ================================================= */
 
-function showToast(title, message) {
+function showToast(
+    title,
+    message
+) {
 
     const toast =
-        document.getElementById("toast");
+        document.getElementById(
+            "toast"
+        );
 
 
     document.getElementById(
         "toastTitle"
-    ).textContent = title;
+    ).textContent =
+        title;
 
 
     document.getElementById(
         "toastMessage"
-    ).textContent = message;
+    ).textContent =
+        message;
 
 
-    toast.classList.add("show");
+    toast.classList.add(
+        "show"
+    );
 
 
     setTimeout(function() {
 
-        toast.classList.remove("show");
+        toast.classList.remove(
+            "show"
+        );
 
     }, 3500);
 
@@ -1323,11 +1590,26 @@ function showToast(title, message) {
 function escapeHTML(value) {
 
     return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
@@ -1339,7 +1621,9 @@ function escapeHTML(value) {
 function scrollToNeeds() {
 
     document
-        .getElementById("needs")
+        .getElementById(
+            "needs"
+        )
         .scrollIntoView({
             behavior: "smooth"
         });
