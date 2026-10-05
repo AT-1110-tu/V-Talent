@@ -952,38 +952,60 @@ function filterNeeds(category, button) {
 /* USER NEEDS */
 /* ================================================= */
 
-function renderUserNeeds() {
-
-    const savedNeeds =
-        JSON.parse(
-            localStorage.getItem("agriTalentNeeds") || "[]"
-        );
-
+async function renderUserNeeds() {
 
     const grid =
-        document.getElementById(
-            "needGrid"
+        document.getElementById("needGrid");
+
+    if (!grid) return;
+
+
+    /* ========================= */
+    /* LẤY DỮ LIỆU TỪ SUPABASE */
+    /* ========================= */
+
+    const { data, error } =
+        await supabaseClient
+            .from("needs")
+            .select("*")
+            .order("created_at", {
+                ascending: false
+            });
+
+
+    if (error) {
+
+        console.error(
+            "SUPABASE LOAD ERROR:",
+            error
         );
 
-
-    if (!grid ||
-        savedNeeds.length === 0) {
-
         return;
-
     }
 
 
-    savedNeeds.forEach(function(need) {
+    /* ========================= */
+    /* XÓA CÁC CARD CŨ DO USER */
+    /* ========================= */
 
-        const existing =
-            document.querySelector(
-                `[data-user-id="${need.id}"]`
-            );
+    grid
+        .querySelectorAll("[data-user-id]")
+        .forEach(function(card) {
+            card.remove();
+        });
 
 
-        if (existing) return;
+    /* Không có nhu cầu */
+    if (!data || data.length === 0) {
+        return;
+    }
 
+
+    /* ========================= */
+    /* HIỂN THỊ NHU CẦU */
+    /* ========================= */
+
+    data.forEach(function(need) {
 
         const card =
             document.createElement("article");
@@ -992,7 +1014,7 @@ function renderUserNeeds() {
         card.className = "need-card";
 
         card.dataset.category =
-            need.category;
+            need.category || "";
 
         card.dataset.userId =
             need.id;
@@ -1004,12 +1026,14 @@ function renderUserNeeds() {
 
                 <span class="tag">
                     ${escapeHTML(
-                        need.category
+                        need.category || ""
                     ).toUpperCase()}
                 </span>
 
                 <span class="status">
-                    ● Đang tìm sinh viên
+                    ● ${escapeHTML(
+                        need.status || "Đang tìm"
+                    )}
                 </span>
 
             </div>
@@ -1017,28 +1041,26 @@ function renderUserNeeds() {
 
             <h3>
                 ${escapeHTML(
-                    need.product
+                    need.title || ""
                 )}
             </h3>
 
 
             <p>
                 ${escapeHTML(
-                    need.description
+                    need.description || ""
                 )}
             </p>
 
 
             <div class="card-info">
 
-                📍 ${escapeHTML(
-                    need.location
-                )}
+                📍 Đà Nẵng
 
                 <br>
 
                 ⏱ ${escapeHTML(
-                    need.duration
+                    need.duration || ""
                 )}
 
             </div>
@@ -1132,14 +1154,8 @@ document.addEventListener(
     "DOMContentLoaded",
     async function() {
 
-        const { data, error } =
-            await supabaseClient
-                .from("needs")
-                .select("*");
+        await renderUserNeeds();
 
-        console.log("SUPABASE TEST:", data, error);
-
-        renderUserNeeds();
         renderStudentProfile();
 
     }
