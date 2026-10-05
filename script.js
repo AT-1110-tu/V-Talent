@@ -359,41 +359,46 @@ function openProject(id) {
 /* USER NEED DETAIL */
 /* ================================================= */
 
-function openUserNeed(id) {
+async function openUserNeed(id) {
 
-    const savedNeeds =
-        JSON.parse(
-            localStorage.getItem("agriTalentNeeds") || "[]"
+    const { data: need, error } =
+        await supabaseClient
+            .from("needs")
+            .select("*")
+            .eq("id", Number(id))
+            .single();
+
+
+    if (error) {
+
+        console.error(
+            "LOAD NEED ERROR:",
+            error
         );
 
-
-    const need =
-        savedNeeds.find(function(item) {
-
-            return item.id === id;
-
-        });
+        return;
+    }
 
 
     if (!need) return;
 
 
-    currentProjectId = id;
+    currentProjectId = need.id;
 
 
     document.getElementById("projectCategory")
         .textContent =
-        need.category.toUpperCase();
+        (need.category || "").toUpperCase();
 
 
     document.getElementById("projectTitle")
         .textContent =
-        need.product;
+        need.title || "";
 
 
     document.getElementById("projectIntro")
         .textContent =
-        need.description;
+        need.description || "";
 
 
     document.getElementById("projectProducer")
@@ -403,22 +408,24 @@ function openUserNeed(id) {
 
     document.getElementById("projectLocation")
         .textContent =
-        need.location;
+        "Đà Nẵng";
 
 
     document.getElementById("projectDuration")
         .textContent =
-        need.duration;
+        need.duration || "";
 
 
     document.getElementById("projectProblem")
         .textContent =
-        need.description;
+        need.description || "";
 
 
     document.getElementById("projectSkills")
         .innerHTML =
-        `<span>${escapeHTML(need.category)}</span>`;
+        `<span>${escapeHTML(
+            need.category || ""
+        )}</span>`;
 
 
     openModal("projectModal");
