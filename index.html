@@ -1,949 +1,1278 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AgriTalent Hub | Nền tảng kết nối và điều phối nguồn nhân lực sinh viên</title>
+    <title>V-Talent | Kết nối năng lực sinh viên</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- ================= HEADER ================= -->
+<!-- ================= HEADER ================= -->
 
-    <header>
+<header class="header">
+    <div class="container nav">
+
         <a href="#home" class="logo">
-            AgriTalent Hub
+            <span class="logo-v">V</span>-Talent
         </a>
 
-        <nav>
+        <nav class="nav-links">
             <a href="#home">Trang chủ</a>
-            <a href="#needs">Nhu cầu cộng đồng</a>
-            <a href="#student">Sinh viên</a>
-            <a href="#about">Về dự án</a>
+            <a href="#how">Cách hoạt động</a>
+            <a href="#needs">Nhu cầu đang mở</a>
+
+            <button
+                class="nav-profile"
+                onclick="openStudentModal()"
+            >
+                Hồ sơ sinh viên
+            </button>
+
+            <a href="#about">Về V-Talent</a>
         </nav>
 
-        <button class="header-btn" onclick="openNeedForm()">
+        <button
+            class="btn btn-orange header-btn"
+            onclick="openBusinessModal()"
+        >
             Đăng nhu cầu
         </button>
-    </header>
 
+    </div>
+</header>
 
-    <main>
 
-        <!-- ================= HERO ================= -->
+<!-- ================= HOME ================= -->
 
-        <section class="hero" id="home">
+<section class="hero" id="home">
 
-            <div class="hero-text">
+    <div class="container hero-grid">
 
-                <p class="eyebrow">
-                    KẾT NỐI NGUỒN LỰC • TẠO GIÁ TRỊ
-                </p>
+        <div class="hero-content">
 
-                <h1>
-                    Nối nhu cầu.<br>
-                    Trao kỹ năng.<br>
-                    <span>Tạo giá trị.</span>
-                </h1>
+            <span class="eyebrow">
+                V-TALENT
+            </span>
 
-                <p class="hero-description">
-                    AgriTalent Hub kết nối các hộ sản xuất, hộ kinh doanh
-                    nông sản địa phương với sinh viên có kiến thức,
-                    kỹ năng và mong muốn tạo ra giá trị thực tế
-                    cho cộng đồng.
-                </p>
+            <h1>
+                Kết nối năng lực sinh viên
+                <span>với nhu cầu thực tế.</span>
+            </h1>
 
-                <div class="hero-buttons">
-
-                    <button class="primary" onclick="scrollToNeeds()">
-                        Khám phá nhu cầu
-                    </button>
-
-                    <button class="secondary" onclick="openNeedForm()">
-                        Tôi cần hỗ trợ
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div class="hero-card">
-
-                <p>MỘT NÔNG SẢN</p>
-
-                <h3>
-                    Đang cần<br>
-                    đúng nguồn lực
-                </h3>
-
-                <div class="mini-flow">
-
-                    <div>🌱</div>
-                    <span>→</span>
-
-                    <div>🎨</div>
-                    <span>→</span>
-
-                    <div>📱</div>
-                    <span>→</span>
-
-                    <div>📈</div>
-
-                </div>
-
-                <p class="small">
-                    Sản phẩm → Kỹ năng → Thị trường → Giá trị
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= STATS ================= -->
-
-        <section class="stats">
-
-            <div>
-                <strong>500+</strong>
-                <span>Sản phẩm OCOP tại Đà Nẵng</span>
-            </div>
-
-            <div>
-                <strong>01</strong>
-                <span>Mô hình thử nghiệm</span>
-            </div>
-
-            <div>
-                <strong>∞</strong>
-                <span>Nguồn lực sinh viên</span>
-            </div>
-
-        </section>
-
-
-        <!-- ================= NEEDS ================= -->
-
-        <section class="needs" id="needs">
-
-            <div class="section-heading">
-
-                <div>
-                    <p class="eyebrow">
-                        NHU CẦU ĐANG MỞ
-                    </p>
-
-                    <h2>
-                        Những điều đang<br>
-                        cần một nguồn lực phù hợp.
-                    </h2>
-                </div>
-
-                <p>
-                    Mỗi nhu cầu là một cơ hội để sinh viên
-                    đưa kỹ năng của mình vào thực tế.
-                </p>
-
-            </div>
-
-
-            <div class="filters">
-
-                <button class="filter active"
-                    onclick="filterNeeds('all', this)">
-                    Tất cả
-                </button>
-
-                <button class="filter"
-                    onclick="filterNeeds('Truyền thông', this)">
-                    Truyền thông
-                </button>
-
-                <button class="filter"
-                    onclick="filterNeeds('Thiết kế', this)">
-                    Thiết kế
-                </button>
-
-                <button class="filter"
-                    onclick="filterNeeds('Bán hàng', this)">
-                    Bán hàng
-                </button>
-
-                <button class="filter"
-                    onclick="filterNeeds('Chụp ảnh', this)">
-                    Chụp ảnh
-                </button>
-
-            </div>
-
-
-            <div class="need-grid" id="needGrid">
-
-                <!-- SPI DANA -->
-
-                <article class="need-card"
-                    data-category="Truyền thông">
-
-                    <div class="card-top">
-
-                        <span class="tag">
-                            TRUYỀN THÔNG
-                        </span>
-
-                        <span class="status">
-                            ● Đang tìm sinh viên
-                        </span>
-
-                    </div>
-
-                    <h3>
-                        Tảo xoắn SpiDana
-                    </h3>
-
-                    <p>
-                        Cần hỗ trợ xây dựng nội dung,
-                        hình ảnh và truyền thông để
-                        tiếp cận khách hàng tốt hơn.
-                    </p>
-
-                    <div class="card-info">
-                        📍 Sơn Trà, Đà Nẵng
-                        <br>
-                        ⏱ Khoảng 2 tuần
-                    </div>
-
-                    <button onclick="openProject('spidana')">
-                        Xem nhu cầu →
-                    </button>
-
-                </article>
-
-
-                <!-- DESIGN -->
-
-                <article class="need-card"
-                    data-category="Thiết kế">
-
-                    <div class="card-top">
-
-                        <span class="tag">
-                            THIẾT KẾ
-                        </span>
-
-                        <span class="status">
-                            ● Đang tìm sinh viên
-                        </span>
-
-                    </div>
-
-                    <h3>
-                        Nhận diện sản phẩm địa phương
-                    </h3>
-
-                    <p>
-                        Cần hỗ trợ thiết kế hình ảnh
-                        giới thiệu sản phẩm và bộ
-                        nhận diện cơ bản.
-                    </p>
-
-                    <div class="card-info">
-                        📍 Đà Nẵng
-                        <br>
-                        ⏱ Khoảng 1 tháng
-                    </div>
-
-                    <button onclick="openProject('design')">
-                        Xem nhu cầu →
-                    </button>
-
-                </article>
-
-
-                <!-- DIGITAL -->
-
-                <article class="need-card"
-                    data-category="Bán hàng">
-
-                    <div class="card-top">
-
-                        <span class="tag">
-                            BÁN HÀNG
-                        </span>
-
-                        <span class="status">
-                            ● Đang tìm sinh viên
-                        </span>
-
-                    </div>
-
-                    <h3>
-                        Hỗ trợ bán hàng trực tuyến
-                    </h3>
-
-                    <p>
-                        Cần hỗ trợ đưa sản phẩm lên
-                        các kênh trực tuyến và cải thiện
-                        cách tiếp cận khách hàng.
-                    </p>
-
-                    <div class="card-info">
-                        📍 Đà Nẵng
-                        <br>
-                        ⏱ Khoảng 1 tuần
-                    </div>
-
-                    <button onclick="openProject('digital')">
-                        Xem nhu cầu →
-                    </button>
-
-                </article>
-
-            </div>
-
-
-            <div class="empty-state" id="emptyState">
-
-                <div>○</div>
-
-                <h3>
-                    Chưa có nhu cầu phù hợp
-                </h3>
-
-                <p>
-                    Thử chọn một lĩnh vực khác hoặc quay lại
-                    xem tất cả nhu cầu.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= HOW IT WORKS ================= -->
-
-        <section class="how">
-
-            <p class="eyebrow">
-                AGRITALENT HUB HOẠT ĐỘNG NHƯ THẾ NÀO?
+            <p class="hero-desc">
+                V-Talent kết nối sinh viên từ các trường đại học tại Đà Nẵng
+                với hộ kinh doanh, hộ sản xuất và các cơ sở kinh doanh nhỏ
+                đang cần hỗ trợ.
             </p>
 
+            <div class="hero-actions">
+
+                <button
+                    class="role-card business-role"
+                    onclick="openBusinessModal()"
+                >
+                    <div>
+                        <span class="role-label">
+                            HỘ KINH DOANH
+                        </span>
+
+                        <strong>
+                            Tôi cần sinh viên hỗ trợ
+                        </strong>
+
+                        <p>
+                            Đăng nhu cầu và tìm người phù hợp.
+                        </p>
+                    </div>
+
+                    <span class="role-arrow">→</span>
+                </button>
+
+
+                <button
+                    class="role-card student-role"
+                    onclick="openStudentModal()"
+                >
+                    <div>
+                        <span class="role-label">
+                            SINH VIÊN
+                        </span>
+
+                        <strong>
+                            Tôi muốn hỗ trợ
+                        </strong>
+
+                        <p>
+                            Tìm nhu cầu phù hợp với năng lực của bạn.
+                        </p>
+                    </div>
+
+                    <span class="role-arrow">→</span>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- KHỐI VISUAL CŨ -->
+
+        <div class="hero-visual">
+
+            <div class="connection-card">
+
+                <div class="connection-header">
+
+                    <div>
+                        <span class="mini-label">
+                            V-TALENT
+                        </span>
+
+                        <strong>
+                            Kết nối nguồn lực
+                        </strong>
+                    </div>
+
+                    <span class="connection-status">
+                        Đang hoạt động
+                    </span>
+
+                </div>
+
+
+                <div class="connection-body">
+
+                    <div class="connection-side business-side">
+                        <span class="connection-number">01</span>
+
+                        <small>HỘ KINH DOANH</small>
+
+                        <strong>
+                            Có nhu cầu
+                        </strong>
+
+                        <p>
+                            Marketing, truyền thông,
+                            vận hành, công nghệ...
+                        </p>
+                    </div>
+
+
+                    <div class="connection-center">
+                        <div class="center-circle">
+                            V
+                        </div>
+
+                        <div class="center-line"></div>
+                    </div>
+
+
+                    <div class="connection-side student-side">
+                        <span class="connection-number">02</span>
+
+                        <small>SINH VIÊN</small>
+
+                        <strong>
+                            Có năng lực
+                        </strong>
+
+                        <p>
+                            Kỹ năng, kiến thức và
+                            thời gian để hỗ trợ.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="connection-result">
+
+                    <div class="result-icon">
+                        ✓
+                    </div>
+
+                    <div>
+                        <small>KẾT QUẢ</small>
+
+                        <strong>
+                            Tìm đúng người cho đúng nhu cầu
+                        </strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= HOW ================= -->
+
+<section class="section how-section" id="how">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-label orange-label">
+                CÁCH HOẠT ĐỘNG
+            </span>
+
             <h2>
-                Một nhu cầu.<br>
-                Một nguồn lực phù hợp.
+                Quy trình kết nối trên V-Talent
             </h2>
 
+            <p>
+                Hai phía có quy trình riêng nhưng cùng hướng đến
+                việc tìm đúng người và hoàn thành công việc.
+            </p>
 
-            <div class="steps">
+        </div>
 
-                <div class="step">
+
+        <div class="process-grid">
+
+            <!-- HỘ KINH DOANH -->
+
+            <div class="process-column business-process">
+
+                <div class="process-title">
 
                     <span>01</span>
 
-                    <h3>
-                        Đăng nhu cầu
-                    </h3>
-
-                    <p>
-                        Người sản xuất chia sẻ vấn đề cụ thể
-                        đang cần hỗ trợ.
-                    </p>
+                    <div>
+                        <small>HỘ KINH DOANH</small>
+                        <h3>Tìm người hỗ trợ</h3>
+                    </div>
 
                 </div>
 
 
-                <div class="step">
+                <div class="process-list">
 
-                    <span>02</span>
+                    <div class="process-item">
+                        <span>01</span>
 
-                    <h3>
-                        Kết nối
-                    </h3>
-
-                    <p>
-                        Sinh viên tìm kiếm nhu cầu phù hợp
-                        với kỹ năng của mình.
-                    </p>
-
-                </div>
+                        <div>
+                            <strong>Đăng nhu cầu</strong>
+                            <p>
+                                Mô tả công việc và vấn đề cần hỗ trợ.
+                            </p>
+                        </div>
+                    </div>
 
 
-                <div class="step">
+                    <div class="process-item">
+                        <span>02</span>
 
-                    <span>03</span>
-
-                    <h3>
-                        Cùng thực hiện
-                    </h3>
-
-                    <p>
-                        Hai bên thống nhất công việc,
-                        thời gian và cùng triển khai.
-                    </p>
-
-                </div>
+                        <div>
+                            <strong>Nhận hồ sơ</strong>
+                            <p>
+                                Xem năng lực và đề xuất từ sinh viên.
+                            </p>
+                        </div>
+                    </div>
 
 
-                <div class="step">
+                    <div class="process-item">
+                        <span>03</span>
 
-                    <span>04</span>
-
-                    <h3>
-                        Ghi nhận kết quả
-                    </h3>
-
-                    <p>
-                        Thành quả được ghi nhận để tạo
-                        giá trị lâu dài.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
+                        <div>
+                            <strong>Chọn sinh viên</strong>
+                            <p>
+                                Lựa chọn người phù hợp với nhu cầu.
+                            </p>
+                        </div>
+                    </div>
 
 
-        <!-- ================= STUDENT ================= -->
+                    <div class="process-item">
+                        <span>04</span>
 
-        <section class="student" id="student">
-
-            <div>
-
-                <p class="eyebrow">
-                    DÀNH CHO SINH VIÊN
-                </p>
-
-                <h2>
-                    Bạn có một kỹ năng.<br>
-                    Hãy để nó tạo ra giá trị.
-                </h2>
-
-                <p>
-                    Thiết kế, viết nội dung, chụp ảnh,
-                    truyền thông, bán hàng trực tuyến...
-                    AgriTalent Hub giúp bạn tìm những nhu cầu
-                    phù hợp để bắt đầu.
-                </p>
-
-                <button class="primary"
-                    onclick="openStudentForm()">
-
-                    Tạo hồ sơ AgriTalent Hub →
-
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= MY ACTIVITY ================= -->
-
-        <section class="activity" id="activity">
-
-            <div class="activity-inner">
-
-                <div>
-
-                    <p class="eyebrow">
-                        HỒ SƠ CỦA BẠN
-                    </p>
-
-                    <h2>
-                        Một nơi để theo dõi<br>
-                        những hoạt động của mình.
-                    </h2>
-
-                </div>
-
-
-                <div class="profile-preview"
-                    id="profilePreview">
-
-                    <div class="profile-placeholder">
-
-                        <span>○</span>
-
-                        <p>
-                            Bạn chưa tạo hồ sơ sinh viên.
-                        </p>
-
-                        <button class="secondary"
-                            onclick="openStudentForm()">
-
-                            Tạo hồ sơ
-
-                        </button>
-
+                        <div>
+                            <strong>Đánh giá</strong>
+                            <p>
+                                Đánh giá kết quả sau khi hoàn thành.
+                            </p>
+                        </div>
                     </div>
 
                 </div>
 
             </div>
 
-        </section>
+
+            <!-- SINH VIÊN -->
+
+            <div class="process-column student-process">
+
+                <div class="process-title">
+
+                    <span>02</span>
+
+                    <div>
+                        <small>SINH VIÊN</small>
+                        <h3>Tìm cơ hội thực tế</h3>
+                    </div>
+
+                </div>
 
 
-        <!-- ================= ABOUT ================= -->
+                <div class="process-list">
 
-        <section class="about" id="about">
+                    <div class="process-item">
+                        <span>01</span>
 
-            <p class="eyebrow">
-                VỀ AGRITALENT HUB
-            </p>
+                        <div>
+                            <strong>Tạo hồ sơ</strong>
+                            <p>
+                                Giới thiệu trường học, năng lực và kỹ năng.
+                            </p>
+                        </div>
+                    </div>
 
-            <h2>
-                Không chỉ giúp bán một sản phẩm.<br>
-                Cùng tạo ra khả năng phát triển.
-            </h2>
+
+                    <div class="process-item">
+                        <span>02</span>
+
+                        <div>
+                            <strong>Xem nhu cầu</strong>
+                            <p>
+                                Tìm các công việc phù hợp với năng lực.
+                            </p>
+                        </div>
+                    </div>
 
 
-            <div class="about-text">
+                    <div class="process-item">
+                        <span>03</span>
+
+                        <div>
+                            <strong>Gửi đề xuất</strong>
+                            <p>
+                                Trình bày cách bạn có thể hỗ trợ.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="process-item">
+                        <span>04</span>
+
+                        <div>
+                            <strong>Thực hiện công việc</strong>
+                            <p>
+                                Áp dụng kiến thức vào vấn đề thực tế.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="process-final">
+
+            <div class="final-box">
+
+                <span>03</span>
+
+                <div>
+                    <small>KẾT QUẢ</small>
+
+                    <strong>
+                        Hoàn thành công việc → Đánh giá
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= NEEDS ================= -->
+
+<section class="section needs-section" id="needs">
+
+    <div class="container">
+
+        <div class="section-heading needs-heading">
+
+            <div>
+
+                <span class="section-label orange-label">
+                    CƠ HỘI ĐANG MỞ
+                </span>
+
+                <h2>
+                    Nhu cầu từ hộ kinh doanh
+                </h2>
 
                 <p>
-                    AgriTalent Hub không thay thế các kênh bán hàng.
-                    Nền tảng tập trung vào một mắt xích khác:
-                    kết nối những nhu cầu cụ thể của người sản xuất
-                    với nguồn lực kỹ năng của sinh viên.
-                </p>
-
-                <p>
-                    Một sinh viên có thể chỉ đóng góp một kỹ năng
-                    nhỏ, nhưng khi được kết nối đúng nhu cầu,
-                    kỹ năng đó có thể trở thành một giá trị rất cụ thể
-                    cho sản phẩm và cộng đồng.
+                    Những công việc đang cần sinh viên hỗ trợ.
                 </p>
 
             </div>
 
-        </section>
 
-    </main>
+            <button
+                class="btn btn-orange"
+                onclick="openBusinessModal()"
+            >
+                Đăng nhu cầu
+            </button>
 
-
-    <!-- ================= FOOTER ================= -->
-
-    <footer>
-
-        <div class="logo">
-            AgriTalent Hub
         </div>
 
-        <p>
-            Nền tảng kết nối nguồn lực sinh viên
-            với nông sản địa phương.
+
+        <div class="filter-row">
+
+            <button
+                class="filter-btn active"
+                onclick="filterNeeds('all', this)"
+            >
+                Tất cả
+            </button>
+
+            <button
+                class="filter-btn"
+                onclick="filterNeeds('Truyền thông', this)"
+            >
+                Truyền thông
+            </button>
+
+            <button
+                class="filter-btn"
+                onclick="filterNeeds('Kinh doanh số hóa', this)"
+            >
+                Kinh doanh số hóa
+            </button>
+
+            <button
+                class="filter-btn"
+                onclick="filterNeeds('Vận hành', this)"
+            >
+                Vận hành
+            </button>
+
+        </div>
+
+
+        <div
+            id="needsList"
+            class="needs-grid"
+        ></div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT - CUỐI TRANG ================= -->
+
+<section class="section about-section" id="about">
+
+    <div class="container about-wrapper">
+
+        <div class="about-heading">
+
+            <span class="section-label green-label">
+                VỀ V-TALENT
+            </span>
+
+            <h2>
+                V-Talent là gì?
+            </h2>
+
+        </div>
+
+
+        <div class="about-content">
+
+            <p>
+                V-Talent là nền tảng kết nối sinh viên từ các trường đại học
+                tại Đà Nẵng với hộ kinh doanh và các cơ sở kinh doanh nhỏ
+                đang cần hỗ trợ.
+            </p>
+
+            <p>
+                Hộ kinh doanh có thể đăng nhu cầu thực tế; sinh viên tìm
+                công việc phù hợp với năng lực và gửi đề xuất hỗ trợ.
+                Qua đó, hộ kinh doanh có thêm nguồn lực, còn sinh viên
+                có cơ hội áp dụng kiến thức vào thực tế.
+            </p>
+
+            <div class="about-note">
+
+                <strong>
+                    V-Talent không phải sàn mua bán.
+                </strong>
+
+                <span>
+                    Đây là nền tảng kết nối nhu cầu hỗ trợ
+                    với năng lực sinh viên.
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="container footer-inner">
+
+        <div>
+
+            <div class="footer-logo">
+                <span>V</span>-Talent
+            </div>
+
+            <p>
+                Kết nối năng lực sinh viên với nhu cầu thực tế.
+            </p>
+
+        </div>
+
+
+        <div class="footer-right">
+
+            <span>Demo Project</span>
+            <span>Đà Nẵng</span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- ================= STUDENT MODAL ================= -->
+
+<div id="studentModal" class="modal">
+
+    <div class="modal-box large-modal">
+
+        <button
+            class="modal-close"
+            onclick="closeModal('studentModal')"
+        >
+            ×
+        </button>
+
+        <span class="modal-label green-text">
+            SINH VIÊN
+        </span>
+
+        <h2>
+            Hồ sơ sinh viên
+        </h2>
+
+        <p class="modal-description">
+            Tạo hồ sơ để hộ kinh doanh biết bạn có thể hỗ trợ những gì.
         </p>
 
-    </footer>
 
+        <form id="studentForm">
 
-    <!-- ================================================= -->
-    <!-- MODAL: ĐĂNG NHU CẦU -->
-    <!-- ================================================= -->
+            <div class="form-grid">
 
-    <div class="modal" id="needModal">
-
-        <div class="modal-box">
-
-            <button class="close"
-                onclick="closeModal()">
-                ×
-            </button>
-
-            <p class="eyebrow">
-                ĐĂNG NHU CẦU
-            </p>
-
-            <h2>
-                Bạn đang cần hỗ trợ điều gì?
-            </h2>
-
-
-            <label>
-                Tên sản phẩm / hộ sản xuất
-            </label>
-
-            <input
-                id="productName"
-                type="text"
-                placeholder="Ví dụ: Tảo xoắn SpiDana">
-
-
-            <label>
-                Loại nhu cầu
-            </label>
-
-            <select id="category">
-
-                <option value="">
-                    Chọn lĩnh vực
-                </option>
-
-                <option value="Truyền thông">
-                    Truyền thông
-                </option>
-
-                <option value="Thiết kế">
-                    Thiết kế
-                </option>
-
-                <option value="Bán hàng">
-                    Bán hàng
-                </option>
-
-                <option value="Chụp ảnh">
-                    Chụp ảnh
-                </option>
-
-            </select>
-
-
-            <label>
-                Mô tả nhu cầu
-            </label>
-
-            <textarea
-                id="description"
-                placeholder="Mô tả vấn đề bạn đang cần sinh viên hỗ trợ..."></textarea>
-
-
-            <label>
-                Thời gian dự kiến
-            </label>
-
-            <select id="duration"
-                onchange="toggleCustomDuration()">
-
-                <option value="">
-                    Chọn thời gian
-                </option>
-
-                <option value="Khoảng 1 tuần">
-                    Khoảng 1 tuần
-                </option>
-
-                <option value="Khoảng 2 tuần">
-                    Khoảng 2 tuần
-                </option>
-
-                <option value="Khoảng 1 tháng">
-                    Khoảng 1 tháng
-                </option>
-
-                <option value="custom">
-                    Tùy chọn thời gian
-                </option>
-
-            </select>
-
-
-            <div id="customDurationBox"
-                class="custom-duration">
-
-                <label>
-                    Thời gian bạn mong muốn
-                </label>
-
-                <input
-                    id="customDuration"
-                    type="text"
-                    placeholder="Ví dụ: 10 ngày hoặc 15/9 – 30/9">
-
-            </div>
-
-
-            <button class="primary full-btn"
-                onclick="submitNeed()">
-
-                Gửi nhu cầu
-
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- ================================================= -->
-    <!-- MODAL: SINH VIÊN -->
-    <!-- ================================================= -->
-
-    <div class="modal" id="studentModal">
-
-        <div class="modal-box">
-
-            <button class="close"
-                onclick="closeModal()">
-                ×
-            </button>
-
-            <p class="eyebrow">
-                HỒ SƠ SINH VIÊN
-            </p>
-
-            <h2>
-                Hãy để AgriTalent Hub biết bạn có gì.
-            </h2>
-
-
-            <label>
-                Họ và tên
-            </label>
-
-            <input
-                id="studentName"
-                type="text"
-                placeholder="Tên của bạn">
-
-
-            <label>
-                Bạn có những kỹ năng nào?
-            </label>
-
-
-            <div class="skill-options">
-
-                <label class="skill-option">
-
-                    <input type="checkbox"
-                        value="Content">
-
-                    <span>Content</span>
-
-                </label>
-
-
-                <label class="skill-option">
-
-                    <input type="checkbox"
-                        value="Social Media">
-
-                    <span>Social Media</span>
-
-                </label>
-
-
-                <label class="skill-option">
-
-                    <input type="checkbox"
-                        value="Design">
-
-                    <span>Design</span>
-
-                </label>
-
-
-                <label class="skill-option">
-
-                    <input type="checkbox"
-                        value="Photography">
-
-                    <span>Photography</span>
-
-                </label>
-
-
-                <label class="skill-option">
-
-                    <input type="checkbox"
-                        value="Bán hàng">
-
-                    <span>Bán hàng</span>
-
-                </label>
-
-
-                <label class="skill-option">
+                <div class="form-group">
+                    <label>Họ và tên</label>
 
                     <input
-                        type="checkbox"
-                        value="Khác"
-                        id="otherSkillCheckbox"
-                        onchange="toggleOtherSkill()">
+                        id="studentName"
+                        type="text"
+                        placeholder="Nguyễn Văn A"
+                        required
+                    >
+                </div>
 
-                    <span>Kỹ năng khác</span>
 
-                </label>
+                <div class="form-group">
+                    <label>Trường Đại học</label>
+
+                    <input
+                        id="studentSchool"
+                        type="text"
+                        placeholder="Đại học Kinh tế - ĐH Đà Nẵng"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label>Số điện thoại</label>
+
+                    <input
+                        id="studentPhone"
+                        type="tel"
+                        placeholder="09xxxxxxxx"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label>Gmail</label>
+
+                    <input
+                        id="studentEmail"
+                        type="email"
+                        placeholder="example@gmail.com"
+                        required
+                    >
+                </div>
 
             </div>
 
 
-            <!-- KỸ NĂNG KHÁC -->
-
-            <div id="otherSkillBox"
-                class="other-skill-box">
+            <div class="form-group">
 
                 <label>
-                    Kỹ năng khác của bạn
+                    Giới thiệu thêm về điểm mạnh
+                </label>
+
+                <textarea
+                    id="studentIntro"
+                    rows="4"
+                    placeholder="Ví dụ: chủ động, có kinh nghiệm truyền thông, làm việc nhóm tốt..."
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Năng lực / chuyên môn
+                </label>
+
+                <div class="checkbox-grid">
+
+                    <label class="check-option">
+                        <input
+                            type="checkbox"
+                            name="competency"
+                            value="Marketing"
+                        >
+                        <span>Marketing</span>
+                    </label>
+
+                    <label class="check-option">
+                        <input
+                            type="checkbox"
+                            name="competency"
+                            value="Truyền thông"
+                        >
+                        <span>Truyền thông</span>
+                    </label>
+
+                    <label class="check-option">
+                        <input
+                            type="checkbox"
+                            name="competency"
+                            value="Tài chính – Kế toán"
+                        >
+                        <span>Tài chính – Kế toán</span>
+                    </label>
+
+                    <label class="check-option">
+                        <input
+                            type="checkbox"
+                            name="competency"
+                            value="Luật"
+                        >
+                        <span>Luật</span>
+                    </label>
+
+                    <label class="check-option">
+                        <input
+                            type="checkbox"
+                            name="competency"
+                            value="Công nghệ"
+                        >
+                        <span>Công nghệ</span>
+                    </label>
+
+                    <label class="check-option">
+                        <input
+                            type="checkbox"
+                            name="competency"
+                            value="Khác"
+                            onchange="toggleOther('competencyOther', this)"
+                        >
+                        <span>Khác</span>
+                    </label>
+
+                </div>
+
+
+                <input
+                    id="competencyOther"
+                    class="other-input hidden"
+                    type="text"
+                    placeholder="Nhập năng lực khác..."
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Kỹ năng</label>
+
+                <div class="checkbox-grid">
+
+                    <label class="check-option">
+                        <input
+                            type="checkbox"
+                            name="skill"
+                            value="Viết nội dung"
+                        >
+                        <span>Viết nội dung</span>
+                    </label>
+
+                    <label class="check-option">
+                        <input
+                            type="checkbox"
+                            name="skill"
+                            value="Thiết kế"
+                        >
+                        <span>Thiết kế</span>
+                    </label>
+
+                    <label class="check-option">
+                        <input
+                            type="checkbox"
+                            name="skill"
+                            value="Chụp ảnh/video"
+                        >
+                        <span>Chụp ảnh/video</span>
+                    </label>
+
+                    <label class="check-option">
+                        <input
+                            type="checkbox"
+                            name="skill"
+                            value="Công nghệ/Website"
+                        >
+                        <span>Công nghệ/Website</span>
+                    </label>
+
+                    <label class="check-option">
+                        <input
+                            type="checkbox"
+                            name="skill"
+                            value="Phân tích dữ liệu"
+                        >
+                        <span>Phân tích dữ liệu</span>
+                    </label>
+
+                    <label class="check-option">
+                        <input
+                            type="checkbox"
+                            name="skill"
+                            value="Kiểm định ATTP"
+                        >
+                        <span>Kiểm định ATTP</span>
+                    </label>
+
+                    <label class="check-option">
+                        <input
+                            type="checkbox"
+                            name="skill"
+                            value="Kê khai/quyết toán thuế"
+                        >
+                        <span>Kê khai/quyết toán thuế</span>
+                    </label>
+
+                    <label class="check-option">
+                        <input
+                            type="checkbox"
+                            name="skill"
+                            value="Khác"
+                            onchange="toggleOther('skillOther', this)"
+                        >
+                        <span>Khác</span>
+                    </label>
+
+                </div>
+
+
+                <input
+                    id="skillOther"
+                    class="other-input hidden"
+                    type="text"
+                    placeholder="Nhập kỹ năng khác..."
+                >
+
+            </div>
+
+
+            <button
+                class="btn btn-green full-btn"
+                type="submit"
+            >
+                Lưu hồ sơ
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ================= APPLICATION MODAL ================= -->
+
+<div id="applicationModal" class="modal">
+
+    <div class="modal-box">
+
+        <button
+            class="modal-close"
+            onclick="closeModal('applicationModal')"
+        >
+            ×
+        </button>
+
+        <span class="modal-label green-text">
+            ỨNG TUYỂN
+        </span>
+
+        <h2>
+            Đề xuất hỗ trợ
+        </h2>
+
+        <p class="modal-description">
+            Hãy cho hộ kinh doanh biết bạn có thể đóng góp như thế nào.
+        </p>
+
+
+        <form id="applicationForm">
+
+            <input
+                type="hidden"
+                id="applicationNeedId"
+            >
+
+
+            <div class="form-group">
+
+                <label>
+                    Bạn có hỗ trợ gì cho HKD này?
+                </label>
+
+                <textarea
+                    id="applicationSupport"
+                    rows="4"
+                    required
+                    placeholder="Mô tả cụ thể phần việc bạn có thể hỗ trợ..."
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Vì sao bạn cảm thấy mình phù hợp?
+                </label>
+
+                <textarea
+                    id="applicationFit"
+                    rows="4"
+                    required
+                    placeholder="Nêu kỹ năng, kinh nghiệm hoặc điểm mạnh liên quan..."
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Bạn nghĩ kết quả mình có thể đạt được là gì?
+                </label>
+
+                <textarea
+                    id="applicationResult"
+                    rows="4"
+                    required
+                    placeholder="Ví dụ: hoàn thiện fanpage, xây dựng bộ nội dung..."
+                ></textarea>
+
+            </div>
+
+
+            <button
+                class="btn btn-green full-btn"
+                type="submit"
+            >
+                Gửi đề xuất
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ================= BUSINESS MODAL ================= -->
+
+<div id="businessModal" class="modal">
+
+    <div class="modal-box large-modal">
+
+        <button
+            class="modal-close"
+            onclick="closeModal('businessModal')"
+        >
+            ×
+        </button>
+
+        <span class="modal-label orange-text">
+            HỘ KINH DOANH
+        </span>
+
+        <h2>
+            Đăng nhu cầu hỗ trợ
+        </h2>
+
+        <p class="modal-description">
+            Mô tả vấn đề bạn đang cần hỗ trợ để sinh viên phù hợp
+            có thể gửi đề xuất.
+        </p>
+
+
+        <form id="businessForm">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>
+                        Tên hộ kinh doanh / đơn vị
+                    </label>
+
+                    <input
+                        id="businessName"
+                        type="text"
+                        placeholder="Tên hộ kinh doanh"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label>
+                        Số điện thoại
+                    </label>
+
+                    <input
+                        id="businessPhone"
+                        type="tel"
+                        placeholder="09xxxxxxxx"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label>
+                        Địa chỉ
+                    </label>
+
+                    <input
+                        id="businessAddress"
+                        type="text"
+                        placeholder="Địa chỉ hoạt động"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label>
+                        Lĩnh vực hoạt động
+                    </label>
+
+                    <input
+                        id="businessField"
+                        type="text"
+                        placeholder="Nông sản, thực phẩm, dịch vụ..."
+                        required
+                    >
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Sản phẩm / dịch vụ chính
                 </label>
 
                 <input
-                    id="otherSkill"
+                    id="businessProduct"
                     type="text"
-                    placeholder="Ví dụ: Excel, dựng video, viết kịch bản...">
+                    placeholder="Sản phẩm hoặc dịch vụ chính"
+                    required
+                >
 
             </div>
 
 
-            <label>
-                Bạn muốn hỗ trợ lĩnh vực nào?
-            </label>
+            <div class="form-group">
 
-            <select id="studentCategory">
+                <label>
+                    Nhu cầu cần hỗ trợ
+                </label>
 
-                <option value="">
-                    Chọn lĩnh vực
-                </option>
+                <div class="checkbox-grid">
 
-                <option value="Truyền thông">
-                    Truyền thông
-                </option>
+                    <label class="check-option orange-check">
+                        <input
+                            type="checkbox"
+                            name="businessNeed"
+                            value="Truyền thông"
+                        >
+                        <span>Truyền thông</span>
+                    </label>
 
-                <option value="Thiết kế">
-                    Thiết kế
-                </option>
+                    <label class="check-option orange-check">
+                        <input
+                            type="checkbox"
+                            name="businessNeed"
+                            value="Kinh doanh số hóa"
+                        >
+                        <span>Kinh doanh số hóa</span>
+                    </label>
 
-                <option value="Bán hàng">
-                    Bán hàng
-                </option>
+                    <label class="check-option orange-check">
+                        <input
+                            type="checkbox"
+                            name="businessNeed"
+                            value="Vận hành"
+                        >
+                        <span>Vận hành</span>
+                    </label>
 
-                <option value="Chụp ảnh">
-                    Chụp ảnh
-                </option>
+                    <label class="check-option orange-check">
+                        <input
+                            type="checkbox"
+                            name="businessNeed"
+                            value="Hành chính"
+                        >
+                        <span>Hành chính</span>
+                    </label>
 
-            </select>
+                    <label class="check-option orange-check">
+                        <input
+                            type="checkbox"
+                            name="businessNeed"
+                            value="Khác"
+                            onchange="toggleOther('businessNeedOther', this)"
+                        >
+                        <span>Khác</span>
+                    </label>
+
+                </div>
 
 
-            <label>
-                Giới thiệu ngắn
-            </label>
+                <input
+                    id="businessNeedOther"
+                    class="other-input hidden"
+                    type="text"
+                    placeholder="Nhập nhu cầu khác..."
+                >
 
-            <textarea
-                id="studentBio"
-                placeholder="Một vài dòng về bạn..."></textarea>
+            </div>
 
 
-            <button class="primary full-btn"
-                onclick="saveStudentProfile()">
+            <div class="form-group">
 
-                Lưu hồ sơ
+                <label>
+                    Mô tả nhu cầu
+                </label>
 
+                <textarea
+                    id="businessDescription"
+                    rows="5"
+                    required
+                    placeholder="Bạn đang gặp vấn đề gì? Sinh viên cần hỗ trợ phần nào?"
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>
+                        Cần bao nhiêu người?
+                    </label>
+
+                    <input
+                        id="businessPeople"
+                        type="number"
+                        min="1"
+                        value="1"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Thời gian thực hiện
+                    </label>
+
+                    <input
+                        id="businessDuration"
+                        type="text"
+                        placeholder="Ví dụ: 2 tuần"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Giấy chứng nhận hộ kinh doanh
+                </label>
+
+                <input
+                    id="businessCertificate"
+                    type="file"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                >
+
+                <small class="file-note">
+                    Demo hiện chỉ lưu thông tin biểu mẫu,
+                    chưa tải file lên hệ thống.
+                </small>
+
+            </div>
+
+
+            <button
+                class="btn btn-orange full-btn"
+                type="submit"
+            >
+                Đăng nhu cầu
             </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ================= NEED DETAIL MODAL ================= -->
+
+<div id="needModal" class="modal">
+
+    <div class="modal-box">
+
+        <button
+            class="modal-close"
+            onclick="closeModal('needModal')"
+        >
+            ×
+        </button>
+
+        <span
+            id="needCategory"
+            class="modal-label"
+        ></span>
+
+        <h2 id="needTitle"></h2>
+
+        <p
+            id="needDescription"
+            class="modal-description"
+        ></p>
+
+
+        <div class="need-meta">
+
+            <div>
+                <small>Thời gian</small>
+                <strong id="needDuration"></strong>
+            </div>
+
+            <div>
+                <small>Trạng thái</small>
+
+                <strong class="status-open">
+                    Đang nhận ứng viên
+                </strong>
+            </div>
 
         </div>
 
-    </div>
 
-
-    <!-- ================================================= -->
-    <!-- MODAL: CHI TIẾT DỰ ÁN -->
-    <!-- ================================================= -->
-
-    <div class="modal" id="projectModal">
-
-        <div class="modal-box project-modal">
-
-            <button class="close"
-                onclick="closeModal()">
-                ×
-            </button>
-
-            <p class="eyebrow"
-                id="projectCategory">
-                TRUYỀN THÔNG
-            </p>
-
-            <h2 id="projectTitle">
-                Tảo xoắn SpiDana
-            </h2>
-
-            <p id="projectIntro">
-                ...
-            </p>
-
-
-            <div class="project-details">
-
-                <div>
-                    <span>ĐƠN VỊ</span>
-                    <strong id="projectProducer"></strong>
-                </div>
-
-                <div>
-                    <span>ĐỊA ĐIỂM</span>
-                    <strong id="projectLocation"></strong>
-                </div>
-
-                <div>
-                    <span>THỜI GIAN</span>
-                    <strong id="projectDuration"></strong>
-                </div>
-
-            </div>
-
-
-            <div class="project-section">
-
-                <h4>
-                    Vấn đề cần hỗ trợ
-                </h4>
-
-                <p id="projectProblem"></p>
-
-            </div>
-
-
-            <div class="project-section">
-
-                <h4>
-                    Kỹ năng phù hợp
-                </h4>
-
-                <div class="project-skills"
-                    id="projectSkills">
-                </div>
-
-            </div>
-
-
-            <button class="primary full-btn"
-                onclick="joinProject()">
-
-                Tham gia hỗ trợ →
-
-            </button>
-
-        </div>
+        <button
+            id="applyButton"
+            class="btn btn-green full-btn"
+        >
+            Gửi đề xuất hỗ trợ
+        </button>
 
     </div>
 
-
-    <!-- TOAST -->
-
-    <div class="toast"
-        id="toast">
-
-        <strong id="toastTitle"></strong>
-
-        <span id="toastMessage"></span>
-
-    </div>
+</div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- ================= TOAST ================= -->
+
+<div
+    id="toast"
+    class="toast"
+></div>
+
+
 <script src="script.js"></script>
 
 </body>
-
 </html>
