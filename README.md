@@ -1,2 +1,3 @@
-# agritalent-hub
-AgriTalent Hub – Nền tảng kết nối và điều phối nguồn nhân lực sinh viên cho hộ sản xuất nông nghiệp
+# V-Talent
+
+## Kết nối năng lực sinh viên với nhu cầu thực tế của hộ kinh doanh
