@@ -672,87 +672,54 @@
 
             <div class="form-group">
 
-                <label>
-                    Năng lực / chuyên môn
-                </label>
-
                 
-<div class="checkbox-grid">
+<div class="form-group">
+    <label>Năng lực / chuyên môn</label>
 
-    <label class="check-option orange-check">
-        <input type="checkbox" name="businessNeed" value="Truyền thông">
-        <span>Truyền thông</span>
-    </label>
+    <div class="checkbox-grid">
+        <label class="check-option">
+            <input type="checkbox" name="competency" value="Marketing">
+            <span>Marketing</span>
+        </label>
 
-    <label class="check-option orange-check">
-        <input type="checkbox" name="businessNeed" value="Kinh doanh số hóa">
-        <span>Kinh doanh số hóa</span>
-    </label>
+        <label class="check-option">
+            <input type="checkbox" name="competency" value="Truyền thông">
+            <span>Truyền thông</span>
+        </label>
 
-    <label class="check-option orange-check">
-        <input type="checkbox" name="businessNeed" value="Vận hành">
-        <span>Vận hành</span>
-    </label>
+        <label class="check-option">
+            <input type="checkbox" name="competency" value="Tài chính – Kế toán">
+            <span>Tài chính – Kế toán</span>
+        </label>
 
-    <label class="check-option orange-check">
-        <input type="checkbox" name="businessNeed" value="Hành chính">
-        <span>Hành chính</span>
-    </label>
+        <label class="check-option">
+            <input type="checkbox" name="competency" value="Luật">
+            <span>Luật</span>
+        </label>
 
-    <label class="check-option orange-check">
-        <input type="checkbox" name="businessNeed" value="Khai báo thuế">
-        <span>Khai báo thuế</span>
-    </label>
+        <label class="check-option">
+            <input type="checkbox" name="competency" value="Công nghệ">
+            <span>Công nghệ</span>
+        </label>
 
-    <label class="check-option orange-check">
-        <input type="checkbox" name="businessNeed" value="Quyết toán thuế">
-        <span>Quyết toán thuế</span>
-    </label>
+        <label class="check-option">
+            <input
+                type="checkbox"
+                name="competency"
+                value="Khác"
+                onchange="toggleOther('competencyOther', this)"
+            >
+            <span>Khác</span>
+        </label>
+    </div>
 
-    <label class="check-option orange-check">
-        <input type="checkbox" name="businessNeed" value="Tư vấn pháp lý">
-        <span>Tư vấn pháp lý</span>
-    </label>
-
-    <label class="check-option orange-check">
-        <input type="checkbox" name="businessNeed" value="Thiết kế thương hiệu">
-        <span>Thiết kế thương hiệu</span>
-    </label>
-
-    <label class="check-option orange-check">
-        <input type="checkbox" name="businessNeed" value="Quảng bá sản phẩm">
-        <span>Quảng bá sản phẩm</span>
-    </label>
-
-    <label class="check-option orange-check">
-        <input
-            type="checkbox"
-            name="businessNeed"
-            value="Khác"
-            onchange="toggleOther('businessNeedOther', this)"
-        >
-        <span>Khác</span>
-    </label>
+    <input
+        id="competencyOther"
+        class="other-input hidden"
+        type="text"
+        placeholder="Nhập năng lực khác..."
+    >
 </div>
-<input
-    id="businessNeedOther"
-    class="other-input hidden"
-    type="text"
-    placeholder="Nhập nhu cầu khác..."
->
-
-</div>
-                <input
-                    id="competencyOther"
-                    class="other-input hidden"
-                    type="text"
-                    placeholder="Nhập năng lực khác..."
-                >
-
-            </div>
-
-
-            <div class="form-group">
 
                 <label>Kỹ năng</label>
 
