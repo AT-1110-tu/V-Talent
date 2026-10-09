@@ -1,1304 +1,277 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>V-Talent | Kết nối năng lực sinh viên</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
-<!-- ================= HEADER ================= -->
 
 <header class="header">
     <div class="container nav">
-
-        <a href="#home" class="logo">
-            <span class="logo-v">V</span>-Talent
-        </a>
-
+        <a href="#home" class="logo"><span class="logo-v">V</span>-Talent</a>
         <nav class="nav-links">
             <a href="#home">Trang chủ</a>
             <a href="#how">Cách hoạt động</a>
             <a href="#needs">Nhu cầu đang mở</a>
-
-            <button
-                class="nav-profile"
-                onclick="openStudentModal()"
-            >
-                Hồ sơ sinh viên
-            </button>
-
+            <button class="nav-profile" onclick="openStudentModal()">Hồ sơ sinh viên</button>
             <a href="#about">Về V-Talent</a>
         </nav>
-
-        <button
-            class="btn btn-orange header-btn"
-            onclick="openBusinessModal()"
-        >
-            Đăng nhu cầu
-        </button>
-
+        <button class="btn btn-orange header-btn" onclick="openBusinessModal()">Đăng nhu cầu</button>
     </div>
 </header>
 
-
-<!-- ================= HOME ================= -->
-
 <section class="hero" id="home">
-
     <div class="container hero-grid">
-
         <div class="hero-content">
-
-            <span class="eyebrow">
-                V-TALENT
-            </span>
-
-            <h1>
-                Kết nối năng lực sinh viên
-                <span>với nhu cầu thực tế.</span>
-            </h1>
-
-            <p class="hero-desc">
-                V-Talent kết nối sinh viên từ các trường đại học tại Đà Nẵng
-                với hộ kinh doanh, hộ sản xuất và các cơ sở kinh doanh nhỏ
-                đang cần hỗ trợ.
-            </p>
-
+            <span class="eyebrow">V-TALENT</span>
+            <h1>Kết nối năng lực sinh viên <span>với nhu cầu thực tế.</span></h1>
+            <p class="hero-desc">V-Talent kết nối sinh viên từ các trường đại học tại Đà Nẵng với hộ kinh doanh, hộ sản xuất và các cơ sở kinh doanh nhỏ đang cần hỗ trợ.</p>
             <div class="hero-actions">
-
-                <button
-                    class="role-card business-role"
-                    onclick="openBusinessModal()"
-                >
-                    <div>
-                        <span class="role-label">
-                            HỘ KINH DOANH
-                        </span>
-
-                        <strong>
-                            Tôi cần sinh viên hỗ trợ
-                        </strong>
-
-                        <p>
-                            Đăng nhu cầu và tìm người phù hợp.
-                        </p>
-                    </div>
-
+                <button class="role-card business-role" onclick="openBusinessModal()">
+                    <div><span class="role-label">HỘ KINH DOANH</span><strong>Tôi cần sinh viên hỗ trợ</strong><p>Đăng nhu cầu và tìm người phù hợp.</p></div>
                     <span class="role-arrow">→</span>
                 </button>
-
-
-                <button
-                    class="role-card student-role"
-                    onclick="openStudentModal()"
-                >
-                    <div>
-                        <span class="role-label">
-                            SINH VIÊN
-                        </span>
-
-                        <strong>
-                            Tôi muốn hỗ trợ
-                        </strong>
-
-                        <p>
-                            Tìm nhu cầu phù hợp với năng lực của bạn.
-                        </p>
-                    </div>
-
+                <button class="role-card student-role" onclick="openStudentModal()">
+                    <div><span class="role-label">SINH VIÊN</span><strong>Tôi muốn hỗ trợ</strong><p>Tìm nhu cầu phù hợp với năng lực của bạn.</p></div>
                     <span class="role-arrow">→</span>
                 </button>
-
             </div>
-
         </div>
-
-
-        <!-- KHỐI VISUAL CŨ -->
 
         <div class="hero-visual">
-
             <div class="connection-card">
-
                 <div class="connection-header">
-
-                    <div>
-                        <span class="mini-label">
-                            V-TALENT
-                        </span>
-
-                        <strong>
-                            Kết nối nguồn lực
-                        </strong>
-                    </div>
-
-                    <span class="connection-status">
-                        Đang hoạt động
-                    </span>
-
+                    <div><span class="mini-label">V-TALENT</span><strong>Kết nối nguồn lực</strong></div>
+                    <span class="connection-status">Đang hoạt động</span>
                 </div>
-
-
                 <div class="connection-body">
-
                     <div class="connection-side business-side">
-                        <span class="connection-number">01</span>
-
-                        <small>HỘ KINH DOANH</small>
-
-                        <strong>
-                            Có nhu cầu
-                        </strong>
-
-                        <p>
-                            Marketing, truyền thông,
-                            vận hành, công nghệ...
-                        </p>
+                        <span class="connection-number">01</span><small>HỘ KINH DOANH</small><strong>Có nhu cầu</strong>
+                        <p>Marketing, truyền thông, vận hành, công nghệ...</p>
                     </div>
-
-
-                    <div class="connection-center">
-                        <div class="center-circle">
-                            V
-                        </div>
-
-                        <div class="center-line"></div>
-                    </div>
-
-
+                    <div class="connection-center"><div class="center-circle">V</div><div class="center-line"></div></div>
                     <div class="connection-side student-side">
-                        <span class="connection-number">02</span>
-
-                        <small>SINH VIÊN</small>
-
-                        <strong>
-                            Có năng lực
-                        </strong>
-
-                        <p>
-                            Kỹ năng, kiến thức và
-                            thời gian để hỗ trợ.
-                        </p>
+                        <span class="connection-number">02</span><small>SINH VIÊN</small><strong>Có năng lực</strong>
+                        <p>Kỹ năng, kiến thức và thời gian để hỗ trợ.</p>
                     </div>
-
                 </div>
-
-
                 <div class="connection-result">
-
-                    <div class="result-icon">
-                        ✓
-                    </div>
-
-                    <div>
-                        <small>KẾT QUẢ</small>
-
-                        <strong>
-                            Tìm đúng người cho đúng nhu cầu
-                        </strong>
-                    </div>
-
+                    <div class="result-icon">✓</div>
+                    <div><small>KẾT QUẢ</small><strong>Tìm đúng người cho đúng nhu cầu</strong></div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 </section>
-
-
-<!-- ================= HOW ================= -->
 
 <section class="section how-section" id="how">
-
     <div class="container">
-
         <div class="section-heading">
-
-            <span class="section-label orange-label">
-                CÁCH HOẠT ĐỘNG
-            </span>
-
-            <h2>
-                Quy trình kết nối trên V-Talent
-            </h2>
-
-            <p>
-                Hai phía có quy trình riêng nhưng cùng hướng đến
-                việc tìm đúng người và hoàn thành công việc.
-            </p>
-
+            <span class="section-label orange-label">CÁCH HOẠT ĐỘNG</span>
+            <h2>Quy trình kết nối trên V-Talent</h2>
+            <p>Hai phía có quy trình riêng nhưng cùng hướng đến việc tìm đúng người và hoàn thành công việc.</p>
         </div>
-
-
         <div class="process-grid">
-
-            <!-- HỘ KINH DOANH -->
-
             <div class="process-column business-process">
-
-                <div class="process-title">
-
-                    <span>01</span>
-
-                    <div>
-                        <small>HỘ KINH DOANH</small>
-                        <h3>Tìm người hỗ trợ</h3>
-                    </div>
-
-                </div>
-
-
+                <div class="process-title"><span>01</span><div><small>HỘ KINH DOANH</small><h3>Tìm người hỗ trợ</h3></div></div>
                 <div class="process-list">
-
-                    <div class="process-item">
-                        <span>01</span>
-
-                        <div>
-                            <strong>Đăng nhu cầu</strong>
-                            <p>
-                                Mô tả công việc và vấn đề cần hỗ trợ.
-                            </p>
-                        </div>
-                    </div>
-
-
-                    <div class="process-item">
-                        <span>02</span>
-
-                        <div>
-                            <strong>Nhận hồ sơ</strong>
-                            <p>
-                                Xem năng lực và đề xuất từ sinh viên.
-                            </p>
-                        </div>
-                    </div>
-
-
-                    <div class="process-item">
-                        <span>03</span>
-
-                        <div>
-                            <strong>Chọn sinh viên</strong>
-                            <p>
-                                Lựa chọn người phù hợp với nhu cầu.
-                            </p>
-                        </div>
-                    </div>
-
-
-                    <div class="process-item">
-                        <span>04</span>
-
-                        <div>
-                            <strong>Đánh giá</strong>
-                            <p>
-                                Đánh giá kết quả sau khi hoàn thành.
-                            </p>
-                        </div>
-                    </div>
-
+                    <div class="process-item"><span>01</span><div><strong>Đăng nhu cầu</strong><p>Mô tả công việc và vấn đề cần hỗ trợ.</p></div></div>
+                    <div class="process-item"><span>02</span><div><strong>Nhận hồ sơ</strong><p>Xem năng lực và đề xuất từ sinh viên.</p></div></div>
+                    <div class="process-item"><span>03</span><div><strong>Chọn sinh viên</strong><p>Lựa chọn người phù hợp với nhu cầu.</p></div></div>
+                    <div class="process-item"><span>04</span><div><strong>Đánh giá</strong><p>Đánh giá kết quả sau khi hoàn thành.</p></div></div>
                 </div>
-
             </div>
-
-
-            <!-- SINH VIÊN -->
-
             <div class="process-column student-process">
-
-                <div class="process-title">
-
-                    <span>02</span>
-
-                    <div>
-                        <small>SINH VIÊN</small>
-                        <h3>Tìm cơ hội thực tế</h3>
-                    </div>
-
-                </div>
-
-
+                <div class="process-title"><span>02</span><div><small>SINH VIÊN</small><h3>Tìm cơ hội thực tế</h3></div></div>
                 <div class="process-list">
-
-                    <div class="process-item">
-                        <span>01</span>
-
-                        <div>
-                            <strong>Tạo hồ sơ</strong>
-                            <p>
-                                Giới thiệu trường học, năng lực và kỹ năng.
-                            </p>
-                        </div>
-                    </div>
-
-
-                    <div class="process-item">
-                        <span>02</span>
-
-                        <div>
-                            <strong>Xem nhu cầu</strong>
-                            <p>
-                                Tìm các công việc phù hợp với năng lực.
-                            </p>
-                        </div>
-                    </div>
-
-
-                    <div class="process-item">
-                        <span>03</span>
-
-                        <div>
-                            <strong>Gửi đề xuất</strong>
-                            <p>
-                                Trình bày cách bạn có thể hỗ trợ.
-                            </p>
-                        </div>
-                    </div>
-
-
-                    <div class="process-item">
-                        <span>04</span>
-
-                        <div>
-                            <strong>Thực hiện công việc</strong>
-                            <p>
-                                Áp dụng kiến thức vào vấn đề thực tế.
-                            </p>
-                        </div>
-                    </div>
-
+                    <div class="process-item"><span>01</span><div><strong>Tạo hồ sơ</strong><p>Giới thiệu trường học, năng lực và kỹ năng.</p></div></div>
+                    <div class="process-item"><span>02</span><div><strong>Xem nhu cầu</strong><p>Tìm các công việc phù hợp với năng lực.</p></div></div>
+                    <div class="process-item"><span>03</span><div><strong>Gửi đề xuất</strong><p>Trình bày cách bạn có thể hỗ trợ.</p></div></div>
+                    <div class="process-item"><span>04</span><div><strong>Thực hiện công việc</strong><p>Áp dụng kiến thức vào vấn đề thực tế.</p></div></div>
                 </div>
-
             </div>
-
         </div>
-
-
-        <div class="process-final">
-
-            <div class="final-box">
-
-                <span>03</span>
-
-                <div>
-                    <small>KẾT QUẢ</small>
-
-                    <strong>
-                        Hoàn thành công việc → Đánh giá
-                    </strong>
-                </div>
-
-            </div>
-
-        </div>
-
+        <div class="process-final"><div class="final-box"><span>03</span><div><small>KẾT QUẢ</small><strong>Hoàn thành công việc → Đánh giá</strong></div></div></div>
     </div>
-
 </section>
-
-
-<!-- ================= NEEDS ================= -->
 
 <section class="section needs-section" id="needs">
-
     <div class="container">
-
         <div class="section-heading needs-heading">
-
-            <div>
-
-                <span class="section-label orange-label">
-                    CƠ HỘI ĐANG MỞ
-                </span>
-
-                <h2>
-                    Nhu cầu từ hộ kinh doanh
-                </h2>
-
-                <p>
-                    Những công việc đang cần sinh viên hỗ trợ.
-                </p>
-
-            </div>
-
-
-            <button
-                class="btn btn-orange"
-                onclick="openBusinessModal()"
-            >
-                Đăng nhu cầu
-            </button>
-
+            <div><span class="section-label orange-label">CƠ HỘI ĐANG MỞ</span><h2>Nhu cầu từ hộ kinh doanh</h2><p>Những công việc đang cần sinh viên hỗ trợ.</p></div>
+            <button class="btn btn-orange" onclick="openBusinessModal()">Đăng nhu cầu</button>
         </div>
 
-
-        
-<div class="filter-row">
-    <button class="filter-btn active" onclick="filterNeeds('all', this)">
-        Tất cả
-    </button>
-    <button class="filter-btn" onclick="filterNeeds('Truyền thông', this)">
-        Truyền thông
-    </button>
-    <button class="filter-btn" onclick="filterNeeds('Kinh doanh số hóa', this)">
-        Kinh doanh số hóa
-    </button>
-    <button class="filter-btn" onclick="filterNeeds('Vận hành', this)">
-        Vận hành
-    </button>
-    <button class="filter-btn" onclick="filterNeeds('Khai báo thuế', this)">
-        Khai báo thuế
-    </button>
-    <button class="filter-btn" onclick="filterNeeds('Quyết toán thuế', this)">
-        Quyết toán thuế
-    </button>
-    <button class="filter-btn" onclick="filterNeeds('Tư vấn pháp lý', this)">
-        Tư vấn pháp lý
-    </button>
-    <button class="filter-btn" onclick="filterNeeds('Thiết kế thương hiệu', this)">
-        Thiết kế thương hiệu
-    </button>
-    <button class="filter-btn" onclick="filterNeeds('Quảng bá sản phẩm', this)">
-        Quảng bá sản phẩm
-    </button>
-</div>
-
-
-        <div
-            id="needsList"
-            class="needs-grid"
-        ></div>
-
+        <div class="filter-row">
+            <button class="filter-btn active" onclick="filterNeeds('all', this)">Tất cả</button>
+            <button class="filter-btn" onclick="filterNeeds('Truyền thông', this)">Truyền thông</button>
+            <button class="filter-btn" onclick="filterNeeds('Kinh doanh số hóa', this)">Kinh doanh số hóa</button>
+            <button class="filter-btn" onclick="filterNeeds('Vận hành', this)">Vận hành</button>
+            <button class="filter-btn" onclick="filterNeeds('Khai báo thuế', this)">Khai báo thuế</button>
+            <button class="filter-btn" onclick="filterNeeds('Quyết toán thuế', this)">Quyết toán thuế</button>
+            <button class="filter-btn" onclick="filterNeeds('Tư vấn pháp lý', this)">Tư vấn pháp lý</button>
+            <button class="filter-btn" onclick="filterNeeds('Thiết kế thương hiệu', this)">Thiết kế thương hiệu</button>
+            <button class="filter-btn" onclick="filterNeeds('Quảng bá sản phẩm', this)">Quảng bá sản phẩm</button>
+        </div>
+        <div id="needsList" class="needs-grid"></div>
     </div>
-
 </section>
-
-
-<!-- ================= ABOUT - CUỐI TRANG ================= -->
 
 <section class="section about-section" id="about">
-
     <div class="container about-wrapper">
-
-        <div class="about-heading">
-
-            <span class="section-label green-label">
-                VỀ V-TALENT
-            </span>
-
-            <h2>
-                V-Talent là gì?
-            </h2>
-
-        </div>
-
-
+        <div class="about-heading"><span class="section-label green-label">VỀ V-TALENT</span><h2>V-Talent là gì?</h2></div>
         <div class="about-content">
-
-            <p>
-                V-Talent là nền tảng kết nối sinh viên từ các trường đại học
-                tại Đà Nẵng với hộ kinh doanh và các cơ sở kinh doanh nhỏ
-                đang cần hỗ trợ.
-            </p>
-
-            <p>
-                Hộ kinh doanh có thể đăng nhu cầu thực tế; sinh viên tìm
-                công việc phù hợp với năng lực và gửi đề xuất hỗ trợ.
-                Qua đó, hộ kinh doanh có thêm nguồn lực, còn sinh viên
-                có cơ hội áp dụng kiến thức vào thực tế.
-            </p>
-
-            <div class="about-note">
-
-                <strong>
-                    V-Talent không phải sàn mua bán.
-                </strong>
-
-                <span>
-                    Đây là nền tảng kết nối nhu cầu hỗ trợ
-                    với năng lực sinh viên.
-                </span>
-
-            </div>
-
+            <p>V-Talent là nền tảng kết nối sinh viên từ các trường đại học tại Đà Nẵng với hộ kinh doanh và các cơ sở kinh doanh nhỏ đang cần hỗ trợ.</p>
+            <p>Hộ kinh doanh có thể đăng nhu cầu thực tế; sinh viên tìm công việc phù hợp với năng lực và gửi đề xuất hỗ trợ. Qua đó, hộ kinh doanh có thêm nguồn lực, còn sinh viên có cơ hội áp dụng kiến thức vào thực tế.</p>
+            <div class="about-note"><strong>V-Talent không phải sàn mua bán.</strong><span>Đây là nền tảng kết nối nhu cầu hỗ trợ với năng lực sinh viên.</span></div>
         </div>
-
     </div>
-
 </section>
 
-
-<!-- ================= FOOTER ================= -->
-
 <footer class="footer">
-
     <div class="container footer-inner">
-
-        <div>
-
-            <div class="footer-logo">
-                <span>V</span>-Talent
-            </div>
-
-            <p>
-                Kết nối năng lực sinh viên với nhu cầu thực tế.
-            </p>
-
-        </div>
-
-
-        <div class="footer-right">
-
-            <span>Demo Project</span>
-            <span>Đà Nẵng</span>
-
-        </div>
-
+        <div><div class="footer-logo"><span>V</span>-Talent</div><p>Kết nối năng lực sinh viên với nhu cầu thực tế.</p></div>
+        <div class="footer-right"><span>Demo Project</span><span>Đà Nẵng</span></div>
     </div>
-
 </footer>
 
-
-<!-- ================= STUDENT MODAL ================= -->
-
+<!-- HỒ SƠ SINH VIÊN -->
 <div id="studentModal" class="modal">
-
     <div class="modal-box large-modal">
-
-        <button
-            class="modal-close"
-            onclick="closeModal('studentModal')"
-        >
-            ×
-        </button>
-
-        <span class="modal-label green-text">
-            SINH VIÊN
-        </span>
-
-        <h2>
-            Hồ sơ sinh viên
-        </h2>
-
-        <p class="modal-description">
-            Tạo hồ sơ để hộ kinh doanh biết bạn có thể hỗ trợ những gì.
-        </p>
-
-
+        <button class="modal-close" onclick="closeModal('studentModal')">×</button>
+        <span class="modal-label green-text">SINH VIÊN</span>
+        <h2>Hồ sơ sinh viên</h2>
+        <p class="modal-description">Tạo hồ sơ để hộ kinh doanh biết bạn có thể hỗ trợ những gì.</p>
         <form id="studentForm">
-
             <div class="form-grid">
-
-                <div class="form-group">
-                    <label>Họ và tên</label>
-
-                    <input
-                        id="studentName"
-                        type="text"
-                        placeholder="Nguyễn Văn A"
-                        required
-                    >
-                </div>
-
-
-                <div class="form-group">
-                    <label>Trường Đại học</label>
-
-                    <input
-                        id="studentSchool"
-                        type="text"
-                        placeholder="Đại học Kinh tế - ĐH Đà Nẵng"
-                        required
-                    >
-                </div>
-
-
-                <div class="form-group">
-                    <label>Số điện thoại</label>
-
-                    <input
-                        id="studentPhone"
-                        type="tel"
-                        placeholder="09xxxxxxxx"
-                        required
-                    >
-                </div>
-
-
-                <div class="form-group">
-                    <label>Gmail</label>
-
-                    <input
-                        id="studentEmail"
-                        type="email"
-                        placeholder="example@gmail.com"
-                        required
-                    >
-                </div>
-
+                <div class="form-group"><label for="studentName">Họ và tên</label><input id="studentName" type="text" placeholder="Nguyễn Văn A" required></div>
+                <div class="form-group"><label for="studentSchool">Trường Đại học</label><input id="studentSchool" type="text" placeholder="Đại học Kinh tế - ĐH Đà Nẵng" required></div>
+                <div class="form-group"><label for="studentPhone">Số điện thoại</label><input id="studentPhone" type="tel" placeholder="09xxxxxxxx" required></div>
+                <div class="form-group"><label for="studentEmail">Gmail</label><input id="studentEmail" type="email" placeholder="example@gmail.com" required></div>
             </div>
-
+            <div class="form-group"><label for="studentIntro">Giới thiệu thêm về điểm mạnh</label><textarea id="studentIntro" rows="4" placeholder="Ví dụ: chủ động, có kinh nghiệm truyền thông, làm việc nhóm tốt..."></textarea></div>
 
             <div class="form-group">
-
-                <label>
-                    Giới thiệu thêm về điểm mạnh
-                </label>
-
-                <textarea
-                    id="studentIntro"
-                    rows="4"
-                    placeholder="Ví dụ: chủ động, có kinh nghiệm truyền thông, làm việc nhóm tốt..."
-                ></textarea>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Năng lực / chuyên môn
-                </label>
-
+                <label>Năng lực / chuyên môn</label>
                 <div class="checkbox-grid">
-
-                    <label class="check-option">
-                        <input
-                            type="checkbox"
-                            name="competency"
-                            value="Marketing"
-                        >
-                        <span>Marketing</span>
-                    </label>
-
-                    <label class="check-option">
-                        <input
-                            type="checkbox"
-                            name="competency"
-                            value="Truyền thông"
-                        >
-                        <span>Truyền thông</span>
-                    </label>
-
-                    <label class="check-option">
-                        <input
-                            type="checkbox"
-                            name="competency"
-                            value="Tài chính – Kế toán"
-                        >
-                        <span>Tài chính – Kế toán</span>
-                    </label>
-
-                    <label class="check-option">
-                        <input
-                            type="checkbox"
-                            name="competency"
-                            value="Luật"
-                        >
-                        <span>Luật</span>
-                    </label>
-
-                    <label class="check-option">
-                        <input
-                            type="checkbox"
-                            name="competency"
-                            value="Công nghệ"
-                        >
-                        <span>Công nghệ</span>
-                    </label>
-
-                    <label class="check-option">
-                        <input
-                            type="checkbox"
-                            name="competency"
-                            value="Khác"
-                            onchange="toggleOther('competencyOther', this)"
-                        >
-                        <span>Khác</span>
-                    </label>
-
+                    <label class="check-option"><input type="checkbox" name="competency" value="Marketing"><span>Marketing</span></label>
+                    <label class="check-option"><input type="checkbox" name="competency" value="Truyền thông"><span>Truyền thông</span></label>
+                    <label class="check-option"><input type="checkbox" name="competency" value="Tài chính – Kế toán"><span>Tài chính – Kế toán</span></label>
+                    <label class="check-option"><input type="checkbox" name="competency" value="Luật"><span>Luật</span></label>
+                    <label class="check-option"><input type="checkbox" name="competency" value="Công nghệ"><span>Công nghệ</span></label>
+                    <label class="check-option"><input type="checkbox" name="competency" value="Khác" onchange="toggleOther('competencyOther', this)"><span>Khác</span></label>
                 </div>
-
-
-                <input
-                    id="competencyOther"
-                    class="other-input hidden"
-                    type="text"
-                    placeholder="Nhập năng lực khác..."
-                >
-
+                <input id="competencyOther" class="other-input hidden" type="text" placeholder="Nhập năng lực khác...">
             </div>
 
-
             <div class="form-group">
-
                 <label>Kỹ năng</label>
-
                 <div class="checkbox-grid">
-
-                    <label class="check-option">
-                        <input
-                            type="checkbox"
-                            name="skill"
-                            value="Viết nội dung"
-                        >
-                        <span>Viết nội dung</span>
-                    </label>
-
-                    <label class="check-option">
-                        <input
-                            type="checkbox"
-                            name="skill"
-                            value="Thiết kế"
-                        >
-                        <span>Thiết kế</span>
-                    </label>
-
-                    <label class="check-option">
-                        <input
-                            type="checkbox"
-                            name="skill"
-                            value="Chụp ảnh/video"
-                        >
-                        <span>Chụp ảnh/video</span>
-                    </label>
-
-                    <label class="check-option">
-                        <input
-                            type="checkbox"
-                            name="skill"
-                            value="Công nghệ/Website"
-                        >
-                        <span>Công nghệ/Website</span>
-                    </label>
-
-                    <label class="check-option">
-                        <input
-                            type="checkbox"
-                            name="skill"
-                            value="Phân tích dữ liệu"
-                        >
-                        <span>Phân tích dữ liệu</span>
-                    </label>
-
-                    <label class="check-option">
-                        <input
-                            type="checkbox"
-                            name="skill"
-                            value="Kiểm định ATTP"
-                        >
-                        <span>Kiểm định ATTP</span>
-                    </label>
-
-                    <label class="check-option">
-                        <input
-                            type="checkbox"
-                            name="skill"
-                            value="Kê khai/quyết toán thuế"
-                        >
-                        <span>Kê khai/quyết toán thuế</span>
-                    </label>
-
-                    <label class="check-option">
-                        <input
-                            type="checkbox"
-                            name="skill"
-                            value="Khác"
-                            onchange="toggleOther('skillOther', this)"
-                        >
-                        <span>Khác</span>
-                    </label>
-
+                    <label class="check-option"><input type="checkbox" name="skill" value="Viết nội dung"><span>Viết nội dung</span></label>
+                    <label class="check-option"><input type="checkbox" name="skill" value="Thiết kế"><span>Thiết kế</span></label>
+                    <label class="check-option"><input type="checkbox" name="skill" value="Chụp ảnh/video"><span>Chụp ảnh/video</span></label>
+                    <label class="check-option"><input type="checkbox" name="skill" value="Công nghệ/Website"><span>Công nghệ/Website</span></label>
+                    <label class="check-option"><input type="checkbox" name="skill" value="Phân tích dữ liệu"><span>Phân tích dữ liệu</span></label>
+                    <label class="check-option"><input type="checkbox" name="skill" value="Kiểm định ATTP"><span>Kiểm định ATTP</span></label>
+                    <label class="check-option"><input type="checkbox" name="skill" value="Kê khai/quyết toán thuế"><span>Kê khai/quyết toán thuế</span></label>
+                    <label class="check-option"><input type="checkbox" name="skill" value="Khác" onchange="toggleOther('skillOther', this)"><span>Khác</span></label>
                 </div>
-
-
-                <input
-                    id="skillOther"
-                    class="other-input hidden"
-                    type="text"
-                    placeholder="Nhập kỹ năng khác..."
-                >
-
+                <input id="skillOther" class="other-input hidden" type="text" placeholder="Nhập kỹ năng khác...">
             </div>
-
-
-            <button
-                class="btn btn-green full-btn"
-                type="submit"
-            >
-                Lưu hồ sơ
-            </button>
-
+            <button class="btn btn-green full-btn" type="submit">Lưu hồ sơ</button>
         </form>
-
     </div>
-
 </div>
 
-
-<!-- ================= APPLICATION MODAL ================= -->
-
+<!-- ĐỀ XUẤT ỨNG TUYỂN -->
 <div id="applicationModal" class="modal">
-
     <div class="modal-box">
-
-        <button
-            class="modal-close"
-            onclick="closeModal('applicationModal')"
-        >
-            ×
-        </button>
-
-        <span class="modal-label green-text">
-            ỨNG TUYỂN
-        </span>
-
-        <h2>
-            Đề xuất hỗ trợ
-        </h2>
-
-        <p class="modal-description">
-            Hãy cho hộ kinh doanh biết bạn có thể đóng góp như thế nào.
-        </p>
-
-
+        <button class="modal-close" onclick="closeModal('applicationModal')">×</button>
+        <span class="modal-label green-text">ỨNG TUYỂN</span>
+        <h2>Đề xuất hỗ trợ</h2>
+        <p class="modal-description">Hãy cho hộ kinh doanh biết bạn có thể đóng góp như thế nào.</p>
         <form id="applicationForm">
-
-            <input
-                type="hidden"
-                id="applicationNeedId"
-            >
-
-
-            <div class="form-group">
-
-                <label>
-                    Bạn có hỗ trợ gì cho HKD này?
-                </label>
-
-                <textarea
-                    id="applicationSupport"
-                    rows="4"
-                    required
-                    placeholder="Mô tả cụ thể phần việc bạn có thể hỗ trợ..."
-                ></textarea>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Vì sao bạn cảm thấy mình phù hợp?
-                </label>
-
-                <textarea
-                    id="applicationFit"
-                    rows="4"
-                    required
-                    placeholder="Nêu kỹ năng, kinh nghiệm hoặc điểm mạnh liên quan..."
-                ></textarea>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Bạn nghĩ kết quả mình có thể đạt được là gì?
-                </label>
-
-                <textarea
-                    id="applicationResult"
-                    rows="4"
-                    required
-                    placeholder="Ví dụ: hoàn thiện fanpage, xây dựng bộ nội dung..."
-                ></textarea>
-
-            </div>
-
-
-            <button
-                class="btn btn-green full-btn"
-                type="submit"
-            >
-                Gửi đề xuất
-            </button>
-
+            <input type="hidden" id="applicationNeedId">
+            <div class="form-group"><label for="applicationSupport">Bạn có hỗ trợ gì cho HKD này?</label><textarea id="applicationSupport" rows="4" required placeholder="Mô tả cụ thể phần việc bạn có thể hỗ trợ..."></textarea></div>
+            <div class="form-group"><label for="applicationFit">Vì sao bạn cảm thấy mình phù hợp?</label><textarea id="applicationFit" rows="4" required placeholder="Nêu kỹ năng, kinh nghiệm hoặc điểm mạnh liên quan..."></textarea></div>
+            <div class="form-group"><label for="applicationResult">Bạn nghĩ kết quả mình có thể đạt được là gì?</label><textarea id="applicationResult" rows="4" required placeholder="Ví dụ: hoàn thiện fanpage, xây dựng bộ nội dung..."></textarea></div>
+            <button class="btn btn-green full-btn" type="submit">Gửi đề xuất</button>
         </form>
-
     </div>
-
 </div>
 
-
-<!-- ================= BUSINESS MODAL ================= -->
-
+<!-- ĐĂNG NHU CẦU HỘ KINH DOANH -->
 <div id="businessModal" class="modal">
-
     <div class="modal-box large-modal">
-
-        <button
-            class="modal-close"
-            onclick="closeModal('businessModal')"
-        >
-            ×
-        </button>
-
-        <span class="modal-label orange-text">
-            HỘ KINH DOANH
-        </span>
-
-        <h2>
-            Đăng nhu cầu hỗ trợ
-        </h2>
-
-        <p class="modal-description">
-            Mô tả vấn đề bạn đang cần hỗ trợ để sinh viên phù hợp
-            có thể gửi đề xuất.
-        </p>
-
-
+        <button class="modal-close" onclick="closeModal('businessModal')">×</button>
+        <span class="modal-label orange-text">HỘ KINH DOANH</span>
+        <h2>Đăng nhu cầu hỗ trợ</h2>
+        <p class="modal-description">Mô tả vấn đề bạn đang cần hỗ trợ để sinh viên phù hợp có thể gửi đề xuất.</p>
         <form id="businessForm">
-
             <div class="form-grid">
-
-                <div class="form-group">
-                    <label>
-                        Tên hộ kinh doanh / đơn vị
-                    </label>
-
-                    <input
-                        id="businessName"
-                        type="text"
-                        placeholder="Tên hộ kinh doanh"
-                        required
-                    >
-                </div>
-
-
-                <div class="form-group">
-                    <label>
-                        Số điện thoại
-                    </label>
-
-                    <input
-                        id="businessPhone"
-                        type="tel"
-                        placeholder="09xxxxxxxx"
-                        required
-                    >
-                </div>
-
-
-                <div class="form-group">
-                    <label>
-                        Địa chỉ
-                    </label>
-
-                    <input
-                        id="businessAddress"
-                        type="text"
-                        placeholder="Địa chỉ hoạt động"
-                        required
-                    >
-                </div>
-
-
-                <div class="form-group">
-                    <label>
-                        Lĩnh vực hoạt động
-                    </label>
-
-                    <input
-                        id="businessField"
-                        type="text"
-                        placeholder="Nông sản, thực phẩm, dịch vụ..."
-                        required
-                    >
-                </div>
-
+                <div class="form-group"><label for="businessName">Tên hộ kinh doanh / đơn vị</label><input id="businessName" type="text" placeholder="Tên hộ kinh doanh" required></div>
+                <div class="form-group"><label for="businessPhone">Số điện thoại</label><input id="businessPhone" type="tel" placeholder="09xxxxxxxx" required></div>
+                <div class="form-group"><label for="businessAddress">Địa chỉ</label><input id="businessAddress" type="text" placeholder="Địa chỉ hoạt động" required></div>
+                <div class="form-group"><label for="businessField">Lĩnh vực hoạt động</label><input id="businessField" type="text" placeholder="Nông sản, thực phẩm, dịch vụ..." required></div>
             </div>
-
+            <div class="form-group"><label for="businessProduct">Sản phẩm / dịch vụ chính</label><input id="businessProduct" type="text" placeholder="Sản phẩm hoặc dịch vụ chính" required></div>
 
             <div class="form-group">
-
-                <label>
-                    Sản phẩm / dịch vụ chính
-                </label>
-
-                <input
-                    id="businessProduct"
-                    type="text"
-                    placeholder="Sản phẩm hoặc dịch vụ chính"
-                    required
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Nhu cầu cần hỗ trợ
-                </label>
-
+                <label>Nhu cầu cần hỗ trợ</label>
                 <div class="checkbox-grid">
-
-                    <label class="check-option orange-check">
-                        <input
-                            type="checkbox"
-                            name="businessNeed"
-                            value="Truyền thông"
-                        >
-                        <span>Truyền thông</span>
-                    </label>
-
-                    <label class="check-option orange-check">
-                        <input
-                            type="checkbox"
-                            name="businessNeed"
-                            value="Kinh doanh số hóa"
-                        >
-                        <span>Kinh doanh số hóa</span>
-                    </label>
-
-                    <label class="check-option orange-check">
-                        <input
-                            type="checkbox"
-                            name="businessNeed"
-                            value="Vận hành"
-                        >
-                        <span>Vận hành</span>
-                    </label>
-
-                    <label class="check-option orange-check">
-                        <input
-                            type="checkbox"
-                            name="businessNeed"
-                            value="Hành chính"
-                        >
-                        <span>Hành chính</span>
-                    </label>
-
-                    <label class="check-option orange-check">
-                        <input
-                            type="checkbox"
-                            name="businessNeed"
-                            value="Khác"
-                            onchange="toggleOther('businessNeedOther', this)"
-                        >
-                    
-<label class="check-option orange-check">
-    <input type="checkbox" name="businessNeed" value="Khai báo thuế">
-    <span>Khai báo thuế</span>
-</label>
-
-<label class="check-option orange-check">
-    <input type="checkbox" name="businessNeed" value="Quyết toán thuế">
-    <span>Quyết toán thuế</span>
-</label>
-
-<label class="check-option orange-check">
-    <input type="checkbox" name="businessNeed" value="Tư vấn pháp lý">
-    <span>Tư vấn pháp lý</span>
-</label>
-
-<label class="check-option orange-check">
-    <input type="checkbox" name="businessNeed" value="Thiết kế thương hiệu">
-    <span>Thiết kế thương hiệu</span>
-</label>
-
-<label class="check-option orange-check">
-    <input type="checkbox" name="businessNeed" value="Quảng bá sản phẩm">
-    <span>Quảng bá sản phẩm</span>
-</label>
-                        <span>Khác</span>
-                    </label>
-
+                    <label class="check-option orange-check"><input type="checkbox" name="businessNeed" value="Truyền thông"><span>Truyền thông</span></label>
+                    <label class="check-option orange-check"><input type="checkbox" name="businessNeed" value="Kinh doanh số hóa"><span>Kinh doanh số hóa</span></label>
+                    <label class="check-option orange-check"><input type="checkbox" name="businessNeed" value="Vận hành"><span>Vận hành</span></label>
+                    <label class="check-option orange-check"><input type="checkbox" name="businessNeed" value="Hành chính"><span>Hành chính</span></label>
+                    <label class="check-option orange-check"><input type="checkbox" name="businessNeed" value="Khai báo thuế"><span>Khai báo thuế</span></label>
+                    <label class="check-option orange-check"><input type="checkbox" name="businessNeed" value="Quyết toán thuế"><span>Quyết toán thuế</span></label>
+                    <label class="check-option orange-check"><input type="checkbox" name="businessNeed" value="Tư vấn pháp lý"><span>Tư vấn pháp lý</span></label>
+                    <label class="check-option orange-check"><input type="checkbox" name="businessNeed" value="Thiết kế thương hiệu"><span>Thiết kế thương hiệu</span></label>
+                    <label class="check-option orange-check"><input type="checkbox" name="businessNeed" value="Quảng bá sản phẩm"><span>Quảng bá sản phẩm</span></label>
+                    <label class="check-option orange-check"><input type="checkbox" name="businessNeed" value="Khác" onchange="toggleOther('businessNeedOther', this)"><span>Khác</span></label>
                 </div>
-
-
-                <input
-                    id="businessNeedOther"
-                    class="other-input hidden"
-                    type="text"
-                    placeholder="Nhập nhu cầu khác..."
-                >
-
+                <input id="businessNeedOther" class="other-input hidden" type="text" placeholder="Nhập nhu cầu khác...">
             </div>
 
-
-            <div class="form-group">
-
-                <label>
-                    Mô tả nhu cầu
-                </label>
-
-                <textarea
-                    id="businessDescription"
-                    rows="5"
-                    required
-                    placeholder="Bạn đang gặp vấn đề gì? Sinh viên cần hỗ trợ phần nào?"
-                ></textarea>
-
-            </div>
-
-
+            <div class="form-group"><label for="businessDescription">Mô tả nhu cầu</label><textarea id="businessDescription" rows="5" required placeholder="Bạn đang gặp vấn đề gì? Sinh viên cần hỗ trợ phần nào?"></textarea></div>
             <div class="form-grid">
-
-                <div class="form-group">
-
-                    <label>
-                        Cần bao nhiêu người?
-                    </label>
-
-                    <input
-                        id="businessPeople"
-                        type="number"
-                        min="1"
-                        value="1"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Thời gian thực hiện
-                    </label>
-
-                    <input
-                        id="businessDuration"
-                        type="text"
-                        placeholder="Ví dụ: 2 tuần"
-                        required
-                    >
-
-                </div>
-
+                <div class="form-group"><label for="businessPeople">Cần bao nhiêu người?</label><input id="businessPeople" type="number" min="1" value="1" required></div>
+                <div class="form-group"><label for="businessDuration">Thời gian thực hiện</label><input id="businessDuration" type="text" placeholder="Ví dụ: 2 tuần" required></div>
             </div>
-
-
             <div class="form-group">
-
-                <label>
-                    Giấy chứng nhận hộ kinh doanh
-                </label>
-
-                <input
-                    id="businessCertificate"
-                    type="file"
-                    accept=".pdf,.jpg,.jpeg,.png"
-                >
-
-                <small class="file-note">
-                    Demo hiện chỉ lưu thông tin biểu mẫu,
-                    chưa tải file lên hệ thống.
-                </small>
-
+                <label for="businessCertificate">Giấy chứng nhận hộ kinh doanh</label>
+                <input id="businessCertificate" type="file" accept=".pdf,.jpg,.jpeg,.png">
+                <small class="file-note">Demo hiện chỉ lưu thông tin biểu mẫu, chưa tải file lên hệ thống.</small>
             </div>
-
-
-            <button
-                class="btn btn-orange full-btn"
-                type="submit"
-            >
-                Đăng nhu cầu
-            </button>
-
+            <button class="btn btn-orange full-btn" type="submit">Đăng nhu cầu</button>
         </form>
-
     </div>
-
 </div>
 
-
-<!-- ================= NEED DETAIL MODAL ================= -->
-
+<!-- CHI TIẾT NHU CẦU -->
 <div id="needModal" class="modal">
-
     <div class="modal-box">
-
-        <button
-            class="modal-close"
-            onclick="closeModal('needModal')"
-        >
-            ×
-        </button>
-
-        <span
-            id="needCategory"
-            class="modal-label"
-        ></span>
-
+        <button class="modal-close" onclick="closeModal('needModal')">×</button>
+        <span id="needCategory" class="modal-label"></span>
         <h2 id="needTitle"></h2>
-
-        <p
-            id="needDescription"
-            class="modal-description"
-        ></p>
-
-
+        <p id="needDescription" class="modal-description"></p>
         <div class="need-meta">
-
-            <div>
-                <small>Thời gian</small>
-                <strong id="needDuration"></strong>
-            </div>
-
-            <div>
-                <small>Trạng thái</small>
-
-                <strong class="status-open">
-                    Đang nhận ứng viên
-                </strong>
-            </div>
-
+            <div><small>Thời gian</small><strong id="needDuration"></strong></div>
+            <div><small>Trạng thái</small><strong class="status-open">Đang nhận ứng viên</strong></div>
         </div>
-
-
-        <button
-            id="applyButton"
-            class="btn btn-green full-btn"
-        >
-            Gửi đề xuất hỗ trợ
-        </button>
-
+        <button id="applyButton" class="btn btn-green full-btn" type="button">Gửi đề xuất hỗ trợ</button>
     </div>
-
 </div>
 
-
-<!-- ================= TOAST ================= -->
-
-<div
-    id="toast"
-    class="toast"
-></div>
-
+<div id="toast" class="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="script.js"></script>
-
 </body>
 </html>
-
