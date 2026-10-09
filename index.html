@@ -448,37 +448,36 @@
         </div>
 
 
-        <div class="filter-row">
-
-            <button
-                class="filter-btn active"
-                onclick="filterNeeds('all', this)"
-            >
-                Tất cả
-            </button>
-
-            <button
-                class="filter-btn"
-                onclick="filterNeeds('Truyền thông', this)"
-            >
-                Truyền thông
-            </button>
-
-            <button
-                class="filter-btn"
-                onclick="filterNeeds('Kinh doanh số hóa', this)"
-            >
-                Kinh doanh số hóa
-            </button>
-
-            <button
-                class="filter-btn"
-                onclick="filterNeeds('Vận hành', this)"
-            >
-                Vận hành
-            </button>
-
-        </div>
+        
+<div class="filter-row">
+    <button class="filter-btn active" onclick="filterNeeds('all', this)">
+        Tất cả
+    </button>
+    <button class="filter-btn" onclick="filterNeeds('Truyền thông', this)">
+        Truyền thông
+    </button>
+    <button class="filter-btn" onclick="filterNeeds('Kinh doanh số hóa', this)">
+        Kinh doanh số hóa
+    </button>
+    <button class="filter-btn" onclick="filterNeeds('Vận hành', this)">
+        Vận hành
+    </button>
+    <button class="filter-btn" onclick="filterNeeds('Khai báo thuế', this)">
+        Khai báo thuế
+    </button>
+    <button class="filter-btn" onclick="filterNeeds('Quyết toán thuế', this)">
+        Quyết toán thuế
+    </button>
+    <button class="filter-btn" onclick="filterNeeds('Tư vấn pháp lý', this)">
+        Tư vấn pháp lý
+    </button>
+    <button class="filter-btn" onclick="filterNeeds('Thiết kế thương hiệu', this)">
+        Thiết kế thương hiệu
+    </button>
+    <button class="filter-btn" onclick="filterNeeds('Quảng bá sản phẩm', this)">
+        Quảng bá sản phẩm
+    </button>
+</div>
 
 
         <div
@@ -1105,6 +1104,31 @@
                             value="Khác"
                             onchange="toggleOther('businessNeedOther', this)"
                         >
+                    
+<label class="check-option orange-check">
+    <input type="checkbox" name="businessNeed" value="Khai báo thuế">
+    <span>Khai báo thuế</span>
+</label>
+
+<label class="check-option orange-check">
+    <input type="checkbox" name="businessNeed" value="Quyết toán thuế">
+    <span>Quyết toán thuế</span>
+</label>
+
+<label class="check-option orange-check">
+    <input type="checkbox" name="businessNeed" value="Tư vấn pháp lý">
+    <span>Tư vấn pháp lý</span>
+</label>
+
+<label class="check-option orange-check">
+    <input type="checkbox" name="businessNeed" value="Thiết kế thương hiệu">
+    <span>Thiết kế thương hiệu</span>
+</label>
+
+<label class="check-option orange-check">
+    <input type="checkbox" name="businessNeed" value="Quảng bá sản phẩm">
+    <span>Quảng bá sản phẩm</span>
+</label>
                         <span>Khác</span>
                     </label>
 
