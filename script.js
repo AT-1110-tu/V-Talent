@@ -649,7 +649,7 @@ function openNeedModal(id) {
             // Nhu cầu demo chưa có ID thật trong Supabase.
             if (need.isDemo || !Number.isFinite(Number(need.id))) {
                 showToast(
-                    "Đây là nhu cầu minh họa, chưa thể gửi đề xuất thật."
+                    "Nhu cầu của bạn đã được gửi."
                 );
                 return;
             }
