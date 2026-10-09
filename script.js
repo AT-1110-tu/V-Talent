@@ -1,4 +1,15 @@
 /* =========================
+   SUPABASE CONNECTION
+========================= */
+
+const SUPABASE_URL = "https://peonwgtejilfwceckbqo.supabase.co/rest/v1/";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_tHn2LFykKVEUtzY8Kukwvw_M_koy24p";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+);
+/* =========================
    DEMO DATA
 ========================= */
 
