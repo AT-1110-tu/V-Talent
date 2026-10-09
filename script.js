@@ -623,6 +623,7 @@ async function openStudentModal() {
     openModal("studentModal");
 }
 
+
 function openNeedModal(id) {
     const need = [...liveNeeds, ...demoNeeds].find(
         item => String(item.id) === String(id)
@@ -633,29 +634,24 @@ function openNeedModal(id) {
         return;
     }
 
-    if ($("needCategory")) {
-        $("needCategory").textContent = need.category || "";
-    }
+    $("needCategory").textContent = need.category || "";
+    $("needTitle").textContent = need.title || "";
+    $("needDescription").textContent = need.description || "";
+    $("needDuration").textContent =
+        need.duration || "Chưa cập nhật";
 
-    if ($("needTitle")) {
-        $("needTitle").textContent = need.title || "";
-    }
+    const applyButton = $("applyButton");
 
-    if ($("needDescription")) {
-        $("needDescription").textContent = need.description || "";
-    }
-
-    if ($("needDuration")) {
-        $("needDuration").textContent =
-            need.duration || "Chưa cập nhật";
-    }
-
-    if ($("applyButton")) {
-        $("applyButton").onclick = () => {
+    if (applyButton) {
+        applyButton.onclick = () => {
             closeModal("needModal");
 
-            
-openApplicationModal(need.id);
+            // Nhu cầu demo chưa có ID thật trong Supabase.
+            if (need.isDemo || !Number.isFinite(Number(need.id))) {
+                showToast(
+                    "Đây là nhu cầu minh họa, chưa thể gửi đề xuất thật."
+                );
+                return;
             }
 
             openApplicationModal(need.id);
