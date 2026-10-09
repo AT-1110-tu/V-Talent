@@ -654,11 +654,8 @@ function openNeedModal(id) {
         $("applyButton").onclick = () => {
             closeModal("needModal");
 
-            if (need.isDemo) {
-                showToast(
-                    "Đây là nhu cầu minh họa, chưa thể ứng tuyển."
-                );
-                return;
+            
+openApplicationModal(need.id);
             }
 
             openApplicationModal(need.id);
